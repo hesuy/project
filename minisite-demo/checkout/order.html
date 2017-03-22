@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<title>Kiehls 购物车</title>
+<meta name="description" content="Kiehls">
+<meta name="keywords" content="Kiehls">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+
+</head>
+<body>
+	<header class="bar-checkout">
+		<a class="back" href="javascript:void(0)"><img src="images/back.png" alt="返回" /></a>
+		<div class="title-checkout">确认订单</div>
+		<a class="phone" href="tel:4009200503"><img src="images/phone.jpg" alt="免费热线" /></a>
+	</header>
+    <section class="container" role="scrollable">
+        <div class="info-title"><img src="images/whiteInfo.jpg" alt="填写信息" /></div>
+        <div class="info-content">
+            <dl class="info-list">
+                <dt class="chooseAddress">请选择配送地址</dt>
+                <dd class="chooseAddress">
+                    <!-- 无地址时显示 
+                    <div class="info-item">
+                        <span>请填写收货信息</span>
+                        <span id="addInfo" class="add"><img src="images/edit.jpg" alt="" /></span>
+                    </div>-->
+
+                    <div class="info-item">
+                        <dl class="address-detail">
+                            <dt>胡玉文（默认地址）</dt>
+                            <dd>
+                                <label>地址：</label>
+                                <span>上海市万荣路700号大宁中心广场A3幢</span>
+                            </dd>
+                            <dd>
+                            <label>邮编：</label><span>200072</span>
+                            </dd>
+                            <dd>
+                                <label>电话：</label>
+                                <span>+86 21 61611866</span>
+                            </dd>
+                        </dl>
+                        <span class="arrow"><a href="otherAddress.html"><img src="images/right-arrow.png" alt="" /></a></span>
+                    </div>
+
+                </dd>
+                <dt class="user-info hide">收货人信息</dt>
+                <dd class="user-info hide">
+                    <div class="info-item">
+                        <span class="input-name">收货人姓名</span>
+                        <span class="info-input"><input id="name" type="text" placeholder="请输入收货人姓名" /></span>
+                        <span class="input-tips">*</span>
+                    </div>
+                    <div class="info-line"></div>
+                    <div class="info-item"><span class="input-name">地域范围</span></div>
+                    <div class="info-item">
+                        <span class="input-name ar prten">省</span>
+                        <span class="info-input">
+                            <a class="control-select">
+                                <select id="selProvince">
+                                    <option value="0">请选择</option>
+                                    <option value="1">北京</option>
+                                </select>
+                            </a>
+                        </span>
+                        <span class="input-tips">*</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="input-name ar prten">市</span>
+                        <span class="info-input">
+                            <a class="control-select">
+                                <select id="selCity">
+                                    <option value="0">请选择</option>
+                                    <option>市区</option>
+                                    <option>县</option>
+                                </select>
+                            </a>
+                        </span>
+                        <span class="input-tips">*</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="input-name ar prten">区</span>
+                        <span class="info-input">
+                            <a class="control-select">
+                                <select id="selArea">
+                                    <option value="0">请选择</option>
+                                    <option>东城区</option>
+                                </select>
+                            </a>
+                        </span>
+                        <span class="input-tips">*</span>
+                    </div>
+                    <div class="info-line"></div>
+                    <div class="info-item">
+                        <span class="input-name">详细地址</span>
+                        <span class="info-input"><input id="address" type="text" placeholder="请输入详细地址" /></span>
+                        <span class="input-tips">*</span>
+                    </div>
+                    <div class="info-line"></div>
+                    <div class="info-item">
+                        <span class="input-name">邮政编码</span>
+                        <span class="info-input"><input id="zipCode" type="number" placeholder="请输入邮政编码" /></span>
+                        <span class="input-tips">*</span>
+                    </div>
+                    <div class="info-line"></div>
+                    <div class="info-item">
+                        <span class="input-name">联系电话</span>
+                        <span class="info-input"><input id="mobile" type="number" placeholder="请输入联系电话" /></span>
+                        <span class="input-tips">*</span>
+                    </div>
+                    <div class="info-line"></div>
+                    <div class="info-item">
+                        <span class="input-name">电子邮件</span>
+                        <span class="info-input"><input id="email" type="text" placeholder="请输入电子邮件" /></span>
+                        <span class="input-tips"></span>
+                    </div>
+
+                    <div class="checkout-submit next">
+                        <button type="button" id="saveAddress" class="btn btn-submit btn-block">保存地址</button>
+                    </div>
+                </dd>
+                <dt>订单总额</dt>
+                <dd>
+                    <div class="info-item">
+                        <span>商品金额</span>
+                        <span class="prices">￥800</span>
+                    </div>
+                    <div class="info-item">
+                        <span>运费</span>
+                        <span class="prices">￥0</span>
+                    </div>
+                    <div class="info-line"></div>
+                    <div class="info-item">
+                        <span>应付金额</span>
+                        <span class="prices red">￥800</span>
+                    </div>
+                </dd>
+                <dt>付款方式</dt>
+                <dd class="pay">
+                    <div class="alipay">
+                        <div class="info-item">
+                            <span class="pay-img"></span>
+                            <span class="pay-name">支付宝支付</span>
+                            <span class="control"><img src="images/check.jpg" alt="" /></span>
+                        </div>
+                    </div>
+                    <div class="info-line"></div>
+                    <div class="unionpay">
+                        <div class="info-item">
+                            <span class="pay-img"></span>
+                            <span class="pay-name">银联支付</span>
+                            <span class="control"><img src="images/out.jpg" alt="" /></span>
+                        </div>
+                        
+                    </div>
+                    <div class="info-line"></div>
+                    <div class="cod">
+                        <div class="info-item">
+                            <span class="pay-img"></span>
+                            <span class="pay-name">货到付款</span>
+                            <span class="control"><img src="images/out.jpg" alt="" /></span>
+                        </div>
+                        
+                    </div>
+                </dd>
+                <dt>发票</dt>
+                <dd>
+                    <div class="invoice">
+                        <div class="info-item">
+                            <span>开具发票</span>
+                            <span class="control"><img src="images/out.jpg" alt="" /></span>
+                        </div>
+                    </div>  
+                    
+                    
+                    <div class="info-extra hide">
+
+                        <span class="info-input"><input type="text" placeholder="请输入发票抬头" /></span>
+                        <span class="input-sure plten"><a class="btn btn-primary btn-noradius" href="javascript:void(0)">确定</a></span>
+                    </div>
+
+                </dd>
+            </dl>
+        </div>
+    	
+
+   		<div class="checkout-submit next">
+   			<button type="button" id="gocounter" class="btn btn-submit btn-block">下一步</button>
+   		</div>
+    	
+    </section>
+    <script type="text/javascript" src="scripts/zepto.min.js"></script>
+    <script type="text/javascript" src="scripts/validate.js"></script>
+    <script type="text/javascript">
+        //返回上一页
+        $('a.back').on('touchend', function() {
+            history.go(-1);
+        });
+
+    	$(function() {
+            //定义选择支付方式
+            var selectPay = $('dd.pay > div');
+            selectPay.first().children().addClass('activity');//设置默认付款方式
+            selectPay.on('click', function() {
+                selectPay.children().removeClass('activity');
+                $(this).children().addClass('activity');
+            });
+
+            //添加收货信息
+            $('#addInfo').on('click', function() {
+                $('.user-info').removeClass('hide');
+                $('.chooseAddress').addClass('hide');
+            })
+
+            //发票抬头显示隐藏
+            $('.invoice').on('click', function() {
+                $(this).children().toggleClass('activity');
+                $(this).next().toggleClass('hide');
+            });
+
+            //验证表单信息
+            $('#saveAddress').on('click', function() {
+                checkMethod($("#name"), 'name');
+                checkMethod($("#mobile"), 'mobile');
+                checkMethod($("#zipCode"), 'zipCode');
+                checkMethod($("#email"), 'email');
+                checkMethod($("#address"), 'address');
+                checkMethod($("#selProvince"), 'area');
+                checkMethod($("#selArea"), 'area');
+                checkMethod($("#selCity"), 'area');
+            });
+
+            $('#name').on('blur', function() {
+                checkMethod($(this), 'name');
+            });
+            $('#mobile').on('blur', function() {
+                checkMethod($(this), 'mobile');
+            });
+            $('#zipCode').on('blur', function() {
+                checkMethod($(this), 'zipCode');
+            });
+            $('#email').on('blur', function() {
+                checkMethod($(this), 'email');
+            });
+            $('#address').on('blur', function() {
+                checkMethod($(this), 'address');
+            });
+            $('#selProvince').on('change', function() {
+                checkMethod($(this), 'area');
+            });
+            $('#selArea').on('change', function() {
+                checkMethod($(this), 'area');
+            });
+            $('#selCity').on('change', function() {
+                checkMethod($(this), 'area');
+            });
+
+            $('#gocounter').on('click', function() {
+                window.location.href = 'orderConfirm.html'
+            });
+
+    	});
+    </script>
+</body>
+</html>

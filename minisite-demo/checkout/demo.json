@@ -1,0 +1,84 @@
+{
+	"campaign": "Biotherm",
+	"number": 2,
+	"sample": [
+		{
+			"type": "男士",
+			"list":  [
+				{
+					"id": "1",
+					"name": "1-1水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				},
+				{
+					"id": "2",
+					"name": "1-2水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				},
+				{
+					"id": "3",
+					"name": "1-3水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				},
+				{
+					"id": "4",
+					"name": "1-1水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				},
+				{
+					"id": "5",
+					"name": "1-2水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				},
+				{
+					"id": "6",
+					"name": "1-3水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				}
+			]
+		},
+
+		{
+			"type": "女士",
+			"list":  [
+				{
+					"id": "7",
+					"name": "2-1水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				},
+				{
+					"id": "8",
+					"name": "2-2水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				},
+				{
+					"id": "9",
+					"name": "2-3水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				}
+			]
+		},
+
+		{
+			"type": "面部",
+			"list":  [
+				{
+					"id": "7",
+					"name": "2-1水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				},
+				{
+					"id": "8",
+					"name": "2-2水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				},
+				{
+					"id": "9",
+					"name": "2-3水动力爽肤水30ML",
+					"pic": "images/sample-demo.png"
+				}
+			]
+		}
+	]
+
+}

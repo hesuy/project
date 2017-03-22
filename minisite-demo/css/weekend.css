@@ -1,0 +1,75 @@
+.weekend img {
+	display: block;
+}
+.timecount-t {
+	padding: 5px 0;
+	text-align: center;
+	font-size: 12px;
+	color: #000;
+	border-bottom: 1px dashed #7f7f7f;
+}
+.timelist dl, .timecount dt, .timecount dd {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+.timelist {
+	margin: 0 25px;
+}
+.timelist dt {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 10px 0;
+}
+.timelist dd {
+	float: left;
+	width: 19%;
+	margin: 0 3%;
+	padding-top: 10px;
+	text-align: center;
+	border: 1px solid #9c9c9c;
+	border-radius: 3px;
+	height: 50px;
+	position: relative;
+	font-size: 20px;
+}
+.timelist dd:after {
+	content: 'DAYS';
+	display: block;
+	position: absolute;
+	bottom: 0px;
+	left:0;
+	width: 100%;
+	height: 12px;
+	font-size: 10px;
+	color: #666;
+}
+.timelist>dl>dd + dd:after{
+	content:"HRS";
+}
+.timelist>dl>dd + dd + dd:after{
+	content:"MINS";
+}
+.timelist>dl>dd + dd + dd + dd:after{
+	content:"SECS";
+}
+
+.timelist dd + dd:before {
+	content: ":";
+	width: 20px;
+	height: 50px;
+	display: block;
+	position: absolute;
+	top: 3px;
+	left: -20px;
+	font-size: 30px;
+	color: #666;
+}
+.time-end {
+	text-align: center;
+	padding: 20px 0 10px 0;
+	font-size: 20px;
+}
+#weekend-end {
+	display: none;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<title>Kiehls 购物车</title>
+<meta name="description" content="Kiehls">
+<meta name="keywords" content="Kiehls">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+
+</head>
+<body>
+	<header class="bar-checkout">
+		<a class="back" href="javascript:void(0)"><img src="images/back.png" alt="返回" /></a>
+		<div class="title-checkout">填写信息</div>
+		<a class="phone" href="tel:4009200503"><img src="images/phone.jpg" alt="免费热线" /></a>
+	</header>
+    <section class="container" role="scrollable">
+        <div class="info-title"><img src="images/whiteInfo.jpg" alt="填写信息" /></div>
+        <div class="info-content">
+            <dl class="info-list">
+                <dt class="chooseAddress">默认地址</dt>
+                <dd class="chooseAddress">
+                    <div class="info-item">
+                        <span class="control-radio"><input type="radio" name="address" /></span>
+                        <dl class="address-detail">
+                            <dt>胡玉文（默认地址）</dt>
+                            <dd>
+                                <label>地址：</label>
+                                <span>上海市万荣路700号大宁中心广场A3幢</span>
+                            </dd>
+                            <dd>
+                            <label>邮编：</label><span>200072</span>
+                            </dd>
+                            <dd>
+                                <label>电话：</label>
+                                <span>+86 21 61611866</span>
+                            </dd>
+                        </dl>
+                        <span class="arrow"><a href="editAddress.html"><img src="images/right-arrow.png" alt="" /></a></span>
+                    </div>
+                </dd>
+                
+            </dl>
+        </div>
+        <div class="info-content">
+            <dl class="info-list">
+                <dt class="chooseAddress">请选择其它配送地址</dt>
+                <dd class="chooseAddress">
+                    <div class="info-item hasline">
+                        <span class="control-radio"><input type="radio" name="address" /></span>
+                        <dl class="address-detail">
+                            <dt>胡玉文（默认地址）</dt>
+                            <dd>
+                                <label>地址：</label>
+                                <span>上海市万荣路700号大宁中心广场A3幢</span>
+                            </dd>
+                            <dd>
+                            <label>邮编：</label><span>200072</span>
+                            </dd>
+                            <dd>
+                                <label>电话：</label>
+                                <span>+86 21 61611866</span>
+                            </dd>
+                        </dl>
+                        <span class="arrow"><a href="editAddress.html"><img src="images/right-arrow.png" alt="" /></a></span>
+                    </div>
+
+                    <div class="info-item hasline">
+                        <span class="control-radio"><input type="radio" name="address" /></span>
+                        <dl class="address-detail">
+                            <dt>胡玉文（默认地址）</dt>
+                            <dd>
+                                <label>地址：</label>
+                                <span>上海市万荣路700号大宁中心广场A3幢</span>
+                            </dd>
+                            <dd>
+                            <label>邮编：</label><span>200072</span>
+                            </dd>
+                            <dd>
+                                <label>电话：</label>
+                                <span>+86 21 61611866</span>
+                            </dd>
+                        </dl>
+                        <span class="arrow"><a href="editAddress.html"><img src="images/right-arrow.png" alt="" /></a></span>
+                    </div>
+
+                    <div class="info-item hasline">
+                        <span class="control-radio"><input type="radio" name="address" /></span>
+                        <dl class="address-detail">
+                            <dt>胡玉文（默认地址）</dt>
+                            <dd>
+                                <label>地址：</label>
+                                <span>上海市万荣路700号大宁中心广场A3幢</span>
+                            </dd>
+                            <dd>
+                            <label>邮编：</label><span>200072</span>
+                            </dd>
+                            <dd>
+                                <label>电话：</label>
+                                <span>+86 21 61611866</span>
+                            </dd>
+                        </dl>
+                        <span class="arrow"><a href="editAddress.html"><img src="images/right-arrow.png" alt="" /></a></span>
+                    </div>
+
+                    <div class="checkout-submit ph10">
+                        <button type="button" id="addAddress" class="btn btn-submit btn-block">新建地址</button>
+                    </div>
+                </dd>
+                
+            </dl>
+        </div>
+    	
+    </section>
+    <script type="text/javascript" src="scripts/zepto.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#addAddress').on('click', function() {
+                window.location.href = 'addAddress.html'
+            });
+
+            $('a.back').on('touchend', function() {
+                history.go(-1);
+            });
+
+            $('.address-detail').on('click', function() {
+                //alert("ok");
+                $(this).siblings('.control-radio').children('input').prop('checked', true);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+@charset "utf-8";
+/**
+ * 
+ * @authors Jack.Chan (971546@qq.com)
+ * @date    2014-06-19 19:40:55
+ * @updatedate    2014-09-18 10:48:55
+ * @version 3.1
+ */
+html{
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+}
+
+body{margin: 0;}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary{display: block;}
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+[hidden],
+template{
+  display: none;
+}
+
+.unselect,
+header,
+nav,
+button,
+.btn-group{
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	-webkit-tap-highlight-color:rgba(201, 224, 253, 0);
+}
+
+

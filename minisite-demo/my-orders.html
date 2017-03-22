@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<title>我的订单 - Biotherm</title>
+<meta name="description" content="Biotherm">
+<meta name="keywords" content="Biotherm">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="apple-touch-icon" href="images/icon/icon_57.png">
+<link rel="apple-touch-icon" sizes="76x76" href="images/icon/icon_76.png">
+<link rel="apple-touch-icon" sizes="120x120" href="images/icon/icon_120.png">
+<link rel="apple-touch-icon" sizes="152x152" href="images/icon/icon_152.png">
+<link rel="apple-touch-icon-precomposed" href="images/icon/icon_114.png">
+</head>
+<body>
+	<aside class="aside-menu aside-right">
+		<div class="aside-mask" act="inactive@.aside-menu"></div>
+		<nav>
+			<a class="aside-logo" href="javascript:void(0)" title="Biotherm"></a>
+			<a href="#"><span class="icon icon-tel"></span>订购热线</a>
+			<a href="#"><span class="icon icon-subscribe"></span>注册订阅</a>
+			<a href="#"><span class="icon icon-weibo"></span>分享至微博</a>
+			<a class="link-close-aside" act="inactive@.aside-menu" href="javascript:void(0)"><span class="icon-close"></span>关闭</a>
+		</nav>
+	</aside>
+
+	<section class="container" role="scrollable">
+		<header class="bar bar-header">
+			<a class="logo" href="#"><img src="images/logo.png" alt="Biotherm"></a>
+			<nav>
+				<a href="#"><span class="icon icon-search"></span></a>
+				<a href="#">
+					<span class="icon icon-cart"></span>
+					<span class="badge">99+</span>
+				</a>
+				<a act="active@.aside-menu" href="javascript:void(0)"><span class="icon icon-menu"></span></a>
+			</nav>
+		</header>
+		
+		<nav class="crumbs">
+			<a href="#"></a>
+			<a href="#">我的账户</a>
+		</nav>
+
+		<div class="content">
+			<dl class="user-info">
+				<dt class="avatar"><img class="image-avatar" src="images/avatar.png" alt="avatar"></dt>
+				<dd>huyuwen，您好</dd>
+				<dd><a class="btn btn-link" href="#"><small>退出登陆</small></a></dd>
+			</dl>
+
+			<div class="segmented-control">
+				<a class="control-item" href="deliver-address.html">收货地址</a>
+				<a class="control-item active" href="my-orders.html"><span class="badge-wrap">我的订单<span class="badge">99+</span></span></a>
+			</div>
+
+
+			<div class="list-orders">
+				<div class="item">
+					<p><a href="order-detail.html" class="pull-right">查看详情</a>订单号：082308502985092835</p>
+					<table class="table table-bordered">
+						<col style="width:80px;">
+						<tr>
+							<th>总价</th>
+							<td>9805.00RMB</td>
+						</tr>
+						<tr>
+							<th>数量</th>
+							<td>3</td>
+						</tr>
+						<tr>
+							<th>下单日期</th>
+							<td>2014-03-22 12:24:24</td>
+						</tr>
+						<tr>
+							<th>订单状态</th>
+							<td>即将发货</td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="item">
+					<p><a href="order-detail.html" class="pull-right">查看详情</a>订单号：082308502985092835</p>
+					<table class="table table-bordered">
+						<col style="width:80px;">
+						<tr>
+							<th>总价</th>
+							<td>9805.00RMB</td>
+						</tr>
+						<tr>
+							<th>数量</th>
+							<td>3</td>
+						</tr>
+						<tr>
+							<th>下单日期</th>
+							<td>2014-03-22 12:24:24</td>
+						</tr>
+						<tr>
+							<th>订单状态</th>
+							<td>已发货 <a class="btn-logistics" href="javascript:void(0)" data="1002">查看物流</a></td>
+						</tr>
+					</table>
+				</div>
+				<div class="item">
+					<p><a href="order-detail.html" class="pull-right">查看详情</a>订单号：082308502985092835</p>
+					<table class="table table-bordered">
+						<col style="width:80px;">
+						<tr>
+							<th>总价</th>
+							<td>9805.00RMB</td>
+						</tr>
+						<tr>
+							<th>数量</th>
+							<td>3</td>
+						</tr>
+						<tr>
+							<th>下单日期</th>
+							<td>2014-03-22 12:24:24</td>
+						</tr>
+						<tr>
+							<th>订单状态</th>
+							<td>已发货 <a class="btn-logistics" href="javascript:void(0)" data="1002">查看物流</a></td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+
+			<div class="list-orders-history" id="list-orders-history">
+				<h5 class="caption">以下是历史订单</h5>
+				<div class="list-orders" id="list-history">
+					<div class="item">
+						<p><a href="order-detail.html" class="pull-right">查看详情</a>订单号：082308502985092835</p>
+						<table class="table table-bordered">
+							<col style="width:80px;">
+							<tr>
+								<th>总价</th>
+								<td>9805.00RMB</td>
+							</tr>
+							<tr>
+								<th>数量</th>
+								<td>3</td>
+							</tr>
+							<tr>
+								<th>下单日期</th>
+								<td>2014-03-22 12:24:24</td>
+							</tr>
+							<tr>
+								<th>订单状态</th>
+								<td>已收货 <a class="btn-logistics" href="javascript:void(0)" data="1002">查看物流</a></td>
+							</tr>
+							<tr>
+								<th>收货时间</th>
+								<td>2014-03-22 12:24:24</td>
+							</tr>
+						</table>
+					</div>
+					<div class="item">
+						<p><a href="order-detail.html" class="pull-right">查看详情</a>订单号：082308502985092835</p>
+						<table class="table table-bordered">
+							<col style="width:80px;">
+							<tr>
+								<th>总价</th>
+								<td>9805.00RMB</td>
+							</tr>
+							<tr>
+								<th>数量</th>
+								<td>3</td>
+							</tr>
+							<tr>
+								<th>下单日期</th>
+								<td>2014-03-22 12:24:24</td>
+							</tr>
+							<tr>
+								<th>订单状态</th>
+								<td>已收货 <a class="btn-logistics" href="javascript:void(0)" data="1002">查看物流</a></td>
+							</tr>
+							<tr>
+								<th>收货时间</th>
+								<td>2014-03-22 12:24:24</td>
+							</tr>
+						</table>
+					</div>
+					
+				</div>
+
+				<div class="p10">
+					<a href="javascript:void(0)" class="btn btn-link btn-block btn-load">加载更多</a>
+				</div>
+			</div>
+
+			<div class="p10">
+				<a href="javascript:void(0)" class="btn btn-block btn-expand">查看历史订单<span class="icon-arrow-d down"></span></a>
+			</div>
+		</div>
+
+	</section>
+
+	<div class="modal" id="modal-logistics">
+		<header class="bar bar-nav">
+			<a class="btn btn-link pull-right" href="javascript:void(0)" act="inactive@#modal-logistics">
+				<span class="icon icon-close"></span>关闭
+			</a>
+			<h1 class="title">查看物流</h1>
+		</header>
+		<div class="content" role="scrollable">
+			<p>
+				您的订单包裹经由【zhaijisong】<br>投递查询包裹运单号：3237716576
+			</p>
+			<ul class="timeline" id="list-logistics">
+				<li class="item active">
+					<div class="timeline-content">
+						<p>到达[福建南平分拨站]</p>
+						<p>2013-12-13 19:58:22</p>
+					</div>
+				</li>
+				<li class="item">
+					<div class="timeline-content">
+						<p>离开[福建泉州运转中心]发往[福建南平站]</p>
+						<p>2013-12-12 22:35:17</p>
+					</div>
+				</li>
+				<li class="item">
+					<div class="timeline-content">
+						<p>离开[上海运转中心陆运中转站]发往[福建泉州运转中心]</p>
+						<p>2013-12-12 22:35:17</p>
+					</div>
+				</li>
+				<li class="item">
+					<div class="timeline-content">
+						<p>到达[上海运转中心陆运中转站]</p>
+						<p>2013-12-12 22:35:17</p>
+					</div>
+				</li>
+				<li class="item">
+					<div class="timeline-content">
+						<p>离开[上海运转中心陆运中转站]发往[福建泉州运转中心]</p>
+						<p>2013-12-12 22:35:17</p>
+					</div>
+				</li>
+				<li class="item">
+					<div class="timeline-content">
+						<p>到达[上海运转中心陆运中转站]</p>
+						<p>2013-12-12 22:35:17</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+<script type="text/template" id="tpl-order">
+	{{each list as item}}
+	<div class="item">
+		<p><a href="javascript:void(0)" class="pull-right">查看详情</a>订单号：{{item.orderid}}</p>
+		<table class="table table-bordered">
+			<col style="width:80px;">
+			<tr>
+				<th>总价</th>
+				<td>{{item.price}}</td>
+			</tr>
+			<tr>
+				<th>数量</th>
+				<td>{{item.count}}</td>
+			</tr>
+			<tr>
+				<th>下单日期</th>
+				<td>{{item.date}}</td>
+			</tr>
+			<tr>
+				<th>订单状态</th>
+				<td>{{item.state}}
+					{{if item.logistics}}
+					<a class="btn-logistics" href="javascript:void(0)" data="{{item.logistics}}">查看物流</a>
+					{{/if}}
+				</td>
+			</tr>
+			{{if item.delivery}}
+			<tr>
+				<th>收货时间</th>
+				<td>{{item.delivery}}</td>
+			</tr>
+			{{/if}}
+		</table>
+	</div>
+	{{/each}}
+</script>
+
+<script type="text/template" id="tpl-logistics">
+	<li class="item">
+		<div class="timeline-content">
+			<p>{text}</p>
+			<p>{date}</p>
+		</div>
+	</li>
+</script>
+
+<script src="scripts/zepto.min.js"></script>
+<script src="scripts/androidKeyboard.js"></script>
+<script src="scripts/template.js"></script>
+<script src="scripts/common.js"></script>
+<script>
+page.historyOrders = function(){
+	var $btn = $('.btn-load');
+	var tpl = $('#tpl-order').html();
+	$btn.addClass('btn-loading').html('<span class="icon-loading"></span>正在加载...');
+	//模拟ajax返回数据
+	//正常时state为200
+	var ret = {
+		'state':'200',
+		'list':[
+			{
+				'orderid':'082308502985092835',
+				'price':'9805.00RMB',
+				'count':'5',
+				'date':'2014-07-07 12:07:18',
+				'state':'已收货',
+				'logistics':'1231231',
+				'delivery':'2014-07-08 12:07:18'
+			},
+			{
+				'orderid':'091308502985092835',
+				'price':'7805.00RMB',
+				'count':'5',
+				'date':'2014-07-08 12:07:18',
+				'state':'已收货',
+				'logistics':'12452435',
+				'delivery':'2014-07-08 12:07:18'
+			}
+		]
+	};
+	/* 
+	//无更多数据
+	var ret = {
+		'state':'200',
+		'list':[]
+	};
+	*/
+	//此处模拟ajax拉取数据
+	setTimeout(function(){
+		if(ret.state=='200'){
+			if(ret.list.length){
+				var html = template('tpl-order', ret);
+				$('#list-history').append(html);
+				$btn.removeClass('btn-loading').html('加载更多');
+			}else{
+				$btn.html('没有更多内容');
+			};
+		}else{
+			$btn.removeClass('btn-loading').html('出错了，重新加载');
+		};
+	}, 1000);
+
+	/*
+	$.ajax({
+		type:'GET',
+		url: '?',
+		data: {page:1},
+		dataType:'json',
+		success: function(ret){
+			if(ret.state=='200'){
+				if(ret.list.length){
+					var html = template('tpl-order', ret);
+					$('#list-history').append(html);
+					$btn.removeClass('btn-loading').html('加载更多');
+				}else{
+					$btn.html('没有更多内容');
+				};
+			}else{
+				$btn.removeClass('btn-loading').html('出错了，重新加载');
+			};
+		}
+	});
+	*/
+};
+
+/* 加载更多 */
+$('.btn-load').on('click', function(){
+	var $this = $(this);
+	if($this.hasClass('btn-loading'))return false;
+	page.historyOrders();
+	return false;
+});
+
+/* 查看物流 */
+$(document).on(E('click'), '.btn-logistics', function(){
+	var logisticsId = $(this).attr('data');
+	if(!logisticsId)return false;
+	//alert('物流ID:'+ logisticsId);
+	//拉取物流数据
+	//$('#list-logistics').html();
+	$('#modal-logistics').addClass('active');
+	return false;
+});
+
+/* 展开 & 收起 历史订单 */
+$('.btn-expand').on(E('click'), function(){
+	var $history = $('#list-orders-history');
+	if($history.hasClass('expand')){
+		$history.removeClass('expand');
+		$(this).html('查看历史订单<span class="icon-arrow-d down"></span>');
+	}else{
+		$history.addClass('expand');
+		$(this).html('收起历史订单<span class="icon-arrow-d up"></span>');
+	};
+	return false;
+});
+</script>
+</body>
+</html>
