@@ -13,32 +13,77 @@
     <div id="countdown"></div>
 </body>
 <script>
-	window.onload = function(){
-		showTime();
-		function addZero(i){
-			if (i<10) {
-				i="0" + i;
-			}
-			return i;
+
+	/*
+	 *方法一
+	 *面向过程的倒计时
+	 */
+	// window.onload = function(){
+	// 	showTime();
+	// 	function addZero(i){
+	// 		if (i<10) {
+	// 			i="0" + i;
+	// 		}
+	// 		return i;
+	// 	}
+	// 	function showTime(){
+	// 		var nowtime = new Date();
+	// 		var endtime = new Date('2017-04-25,16:50:59');
+	// 		var lefttime = parseInt((endtime.getTime()-nowtime.getTime())/1000);
+	// 		var day = parseInt(lefttime/(24*60*60));
+	// 		var hour = parseInt(lefttime/(60*60)%24);
+	// 		var minute = parseInt(lefttime/60%60);
+	// 		var seconds = parseInt(lefttime%60);
+	// 		hour = addZero(hour);
+	// 		minute = addZero(minute);
+	// 		seconds = addZero(seconds);
+	// 		document.getElementById('countdown').innerHTML = "倒计时  "+day +"天"+hour+"小时"+minute+"分钟"+seconds;
+	// 		if (lefttime<0) {
+	// 			document.getElementById('countdown').innerHTML="活动已结束";
+	// 			return ;
+	// 		};
+	// 		setTimeout(showTime, 1000);
+	// 	}
+	// }
+
+	/*
+	 *方法二
+	 */
+	(function(id,endtime){
+		var time = {
+			end : endtime
 		}
-	function showTime(){
-		var nowtime = new Date();
-		var endtime = new Date('2017-04-25,16:50:59');
-		var lefttime = parseInt((endtime.getTime()-nowtime.getTime())/1000);
-		var day = parseInt(lefttime/(24*60*60));
-		var hour = parseInt(lefttime/(60*60)%24);
-		var minute = parseInt(lefttime/60%60);
-		var seconds = parseInt(lefttime%60);
-		hour = addZero(hour);
-		minute = addZero(minute);
-		seconds = addZero(seconds);
-		document.getElementById('countdown').innerHTML = "倒计时  "+day +"天"+hour+"小时"+minute+"分钟"+seconds;
-		if (lefttime<0) {
-			document.getElementById('countdown').innerHTML="活动已结束";
-			return ;
+		time.end = new Date(time.end);
+		time.update = function(){
+			time.now = new Date();
+			//获取总秒数
+			time.left = parseInt((time.end.getTime()-time.now.getTime())/1000);
+			//获取天
+			time.days = parseInt(time.left/3600/24);
+			//获取小时
+			time.hours = parseInt((time.left/3600)%24);
+			//获取分钟
+			time.minutes = parseInt((time.left/60)%60);
+			//获取秒
+			time.seconds = parseInt(time.left%60);
+			//天数格式
+			time._days = (time.days<10? '0'+time.days:time.days);
+			//小时格式
+			time._hours = parseInt(time.hours<10?'0'+time.hours:time.hours);
+			//分钟
+			time._minutes = parseInt(time.minutes<10?'0'+time.minutes:time.hours);
+			//秒
+			time._seconds = parseInt(time.seconds<10?'0'+time.seconds:time.seconds);
+			document.getElementById(id).innerHTML = '<div><span class="days">'+time._days+'天</span><span class="hours">'+time._hours+'小时</span><span class="minutes">'+time._minutes+'分</span><span class="seconds">'+time._seconds+'秒</span></div>';
+
+			if(time.left<0){
+				return false;
+			};
 		};
-		setTimeout(showTime, 1000);
-	}
-}
+		time.update();
+		time.handle = setInterval(function(){
+			time.update();
+		},1000);
+	})('countdown','2017/06/09,13:00:00');
 </script>
 </html>
