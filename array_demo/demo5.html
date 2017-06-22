@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <title>test</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
+    <script type="text/javascript">
+    var deviceWidth = document.documentElement.clientWidth;
+    deviceWidth = deviceWidth > 640 ? 640 : deviceWidth;
+    document.documentElement.style.fontSize = deviceWidth / 6.4 + 'px';
+    </script>
+    <style type="text/css">
+    body{
+        --foo:#ccc;
+        --bar:#000;
+        --fsize:14px;
+    }
+    div{
+        color: var(--foo);
+        font-size: var(--fsize);
+    }
+    </style>
+</head>
+
+<body>
+    <div>asddfadg</div>
+</body>
+<script>
+   var data = [
+    {"id":"1001","name":"值1","value":"1"},
+    {"id":"1001","name":"值1","value":"1-2"},
+    {"id":"1002","name":"值2","value":"2-1"},
+    {"id":"1002","name":"值2","value":"2-2"},
+    {"id":"1002","name":"值2","value":"2-3"},
+    {"id":"1004","name":"值2","value":"4-3"},
+    {"id":"1003","name":"值3","value":"3-1"}
+];
+var serData = [];
+for (var i = 0; i < data.length; i++) {
+    var arr = [];
+    arr.push(data[i].id,data[i].name,data[i].value);
+    // console.log(arr);
+    if (serData.length === 0) {
+        serData[0] = [];
+        serData[0].push(arr);
+    }else{
+    var flag = false; 
+    // console.log(serData);
+    for(let j = 0;j<serData.length;j++){
+        // console.log(serData[j]);
+        if(serData[j][0].indexOf(data[i].id) === -1){
+            continue;
+        }else{
+            serData[j].push(arr);
+            flag = true;
+        }
+    }
+    if(!flag){
+        serData[serData.length] = [];
+        serData[serData.length-1].push(arr);
+    }
+}
+};
+console.log(serData);
+</script>
+
+</html>
