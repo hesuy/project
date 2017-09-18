@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<title>中国邮政</title>
+<meta name="description" content="EMS">
+<meta name="keywords" content="EMS">
+<link rel="stylesheet" href="../dist/css/main.min.css">
+<script>
+    var deviceWidth = document.documentElement.clientWidth;
+    deviceWidth = deviceWidth >640 ? 640 : deviceWidth;
+    document.documentElement.style.fontSize = deviceWidth/6.4 +'px';
+</script>
+</head>
+<body>
+   <header class="bar bar-header">
+        <nav>
+            <ul class="bar-header_nav">
+                <li class="aside-menu">
+                    <a href="javascript:void(0);" class="open-aside-menu">
+                        <span class="icon icon-menu"></span>
+                    </a>
+                </li>
+                <li class="login">
+                    <a href="#">登录</a>
+                    <a href="#">注册</a>
+                </li>
+                <li class="logo">
+                    <a href="javascript:void(0);" class="header-logo"></a>
+                </li>
+                <li class="phone">
+                    <a href="javascript:void(0);">
+                        <span class="icon icon-phone"></span>
+                    </a>
+                </li>
+                <li class="bag">
+                    <a href="javascript:void(0);">
+                        <span class="icon icon-bag"></span>
+                        <span class="badge">9+</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <section class="container" role="scrollable">
+        <nav class="crumbs">
+            <a href="#"></a>
+            <a href="#">填写信息</a>
+        </nav>
+        <ol class="info-steps">
+            <li>1.&nbsp;填写信息</li>
+            <li class="active">2.&nbsp;下单成功</li>
+        </ol>
+        <div class="info-content">
+            <dl class="info-list">
+                <dt class="chooseAddress">默认地址</dt>
+                <dd class="chooseAddress">
+                    <div class="info-item">
+                        <span class="control-radio"><input type="radio" name="address" /></span>
+                        <dl class="address-detail">
+                            <dt>胡玉文（默认地址）</dt>
+                            <dd>
+                                <label>地址：</label>
+                                <span>上海市万荣路700号大宁中心广场A3幢</span>
+                            </dd>
+                            <dd>
+                            <label>邮编：</label><span>200072</span>
+                            </dd>
+                            <dd>
+                                <label>电话：</label>
+                                <span>+86 21 61611866</span>
+                            </dd>
+                        </dl>
+                        <span class="arrow"><a href="editAddress.html"><img src="../dist/images/right-arrow.png" alt="" /></a></span>
+                    </div>
+                </dd>
+                
+            </dl>
+        </div>
+        <div class="info-content">
+            <dl class="info-list">
+                <dt class="chooseAddress">请选择其它配送地址</dt>
+                <dd class="chooseAddress">
+                    <div class="info-item hasline">
+                        <span class="control-radio"><input type="radio" name="address" /></span>
+                        <dl class="address-detail">
+                            <dt>胡玉文（默认地址）</dt>
+                            <dd>
+                                <label>地址：</label>
+                                <span>上海市万荣路700号大宁中心广场A3幢</span>
+                            </dd>
+                            <dd>
+                            <label>邮编：</label><span>200072</span>
+                            </dd>
+                            <dd>
+                                <label>电话：</label>
+                                <span>+86 21 61611866</span>
+                            </dd>
+                        </dl>
+                       <span class="arrow"><a href="editAddress.html"><img src="../dist/images/right-arrow.png" alt="" /></a></span>
+                    </div>
+
+                    <div class="info-item hasline">
+                        <span class="control-radio"><input type="radio" name="address" /></span>
+                        <dl class="address-detail">
+                            <dt>胡玉文（默认地址）</dt>
+                            <dd>
+                                <label>地址：</label>
+                                <span>上海市万荣路700号大宁中心广场A3幢</span>
+                            </dd>
+                            <dd>
+                            <label>邮编：</label><span>200072</span>
+                            </dd>
+                            <dd>
+                                <label>电话：</label>
+                                <span>+86 21 61611866</span>
+                            </dd>
+                        </dl>
+                        <span class="arrow"><a href="editAddress.html"><img src="../dist/images/right-arrow.png" alt="" /></a></span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="control-radio"><input type="radio" name="address" /></span>
+                        <dl class="address-detail">
+                            <dt>胡玉文（默认地址）</dt>
+                            <dd>
+                                <label>地址：</label>
+                                <span>上海市万荣路700号大宁中心广场A3幢</span>
+                            </dd>
+                            <dd>
+                            <label>邮编：</label><span>200072</span>
+                            </dd>
+                            <dd>
+                                <label>电话：</label>
+                                <span>+86 21 61611866</span>
+                            </dd>
+                        </dl>
+                        <span class="arrow"><a href="editAddress.html"><img src="../dist/images/right-arrow.png" alt="" /></a></span>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+
+        <div class="checkout-submit text-center mb10">
+            <button type="button" id="addAddress" class="btn btn-submit btn-radius">新建地址</button>
+        </div>
+    	
+    </section>
+    <script src="../libs/zepto.min.js"></script>
+    <script src="../dist/js/main.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#addAddress').on('click', function() {
+                window.location.href = 'addAddress.html'
+            });
+
+            $('a.back').on('touchend', function() {
+                history.go(-1);
+            });
+
+            $('.address-detail').on('click', function() {
+                //alert("ok");
+                $(this).siblings('.control-radio').children('input').prop('checked', true);
+            });
+        });
+    </script>
+</body>
+</html>

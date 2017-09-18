@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<title>中国邮政</title>
+<meta name="description" content="EMS">
+<meta name="keywords" content="EMS">
+<link rel="stylesheet" href="../libs/css/swiper-3.4.2.min.css">
+<link rel="stylesheet" href="../dist/css/main.min.css">
+<script>
+    var deviceWidth = document.documentElement.clientWidth;
+    deviceWidth = deviceWidth >640 ? 640 : deviceWidth;
+    document.documentElement.style.fontSize = deviceWidth/6.4 +'px';
+</script>
+</head>
+<body>
+	<header class="bar bar-header">
+        <nav>
+            <ul class="bar-header_nav">
+                <!-- <li class="aside-menu">
+                    <a href="javascript:void(0);" class="open-aside-menu">
+                        <span class="icon icon-menu"></span>
+                    </a>
+                </li> -->
+                <li class="login">
+                    <a href="#">登录</a>
+                    <a href="#">注册</a>
+                </li>
+                <li class="logo">
+                    <a href="javascript:void(0);" class="header-logo"></a>
+                </li>
+                <li class="phone">
+                    <a href="javascript:void(0);">
+                        <span class="icon icon-phone"></span>
+                    </a>
+                </li>
+                <li class="bag">
+                    <a href="javascript:void(0);">
+                        <span class="icon icon-bag"></span>
+                        <span class="badge">9+</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+	<section class="container" role="scrollable">
+		<div class="content">
+			<nav class="crumbs">
+            <a href="#"></a>
+            <a href="#">个人中心</a>
+        </nav>
+		<dl class="user-info">
+			<dt>XX，您好</dt>
+			<dd>性别：<label>男</label></dd>
+			<dd>生日：<label>2016-09-28</label></dd>
+			<dd>昵称：<label>阿里</label></dd>
+		</dl>
+		<div class="segmented-control line-top">
+			<a class="control-item active" href="javascriptvoid(0);">我的订单</a>
+		</div>
+		<div class="list-orders">
+			<dl class="item">
+				<dt><a href="#">订单号：082308502985092835</a></dt>
+				<dd><label>订单金额</label><span class="value">￥9805.00</span></dd>
+				<dd><label>下单时间</label><span class="value">2014-03-22 12:24:24</span></dd>
+				<dd><label>订单状态</label><span class="value">即将发货</span></dd>
+			</dl>
+			<dl class="item">
+				<dt><a href="#">订单号：082308502985092835</a></dt>
+				<dd><label>订单金额</label><span class="value">￥9805.00</span></dd>
+				<dd><label>数量</label><span class="value">3</span></dd>
+				<dd><label>下单时间</label><span class="value">2014-03-22 12:24:24</span></dd>
+				<dd><label>订单状态</label><span class="value">已发货<a class="btn-link btn-logistics" data="52345" href="javascript:void(0)">查看物流</a></span></dd>
+			</dl>
+		</div>
+
+			<div class="list-orders-history" id="list-orders-history">
+				<h5 class="caption">以下是历史订单</h5>
+				<div class="list-orders" id="list-history">
+					<dl class="item">
+						<dt><a href="#">订单号：082308502985092835</a></dt>
+						<dd><label>订单金额</label><span class="value">￥9805.00</span></dd>
+						<dd><label>数量</label><span class="value">3</span></dd>
+						<dd><label>下单时间</label><span class="value">2014-03-22 12:24:24</span></dd>
+						<dd><label>订单状态</label><span class="value">已发货<a class="btn btn-link btn-logistics" data="111" href="javascript:void(0)">查看物流</a></span></dd>
+						<dd><label>收货时间</label><span class="value">014-03-22 12:24:24</span></dd>
+					</dl>
+					<dl class="item">
+						<dt><a href="#">订单号：082308502985092835</a></dt>
+						<dd><label>订单金额</label><span class="value">￥9805.00</span></dd>
+						<dd><label>数量</label><span class="value">3</span></dd>
+						<dd><label>下单时间</label><span class="value">2014-03-22 12:24:24</span></dd>
+						<dd><label>订单状态</label><span class="value">已发货<a class="btn btn-link btn-logistics" data="123" href="javascript:void(0)">查看物流</a></span></dd>
+						<dd><label>收货时间</label><span class="value">014-03-22 12:24:24</span></dd>
+					</dl>
+				</div>
+
+				<div class="p10">
+					<a href="javascript:void(0)" class="btn btn-link btn-block btn-load">加载更多</a>
+				</div>
+			</div>
+
+			<div class="p10">
+				<a href="javascript:void(0)" class="btn btn-block btn-expand">查看历史订单<span class="icon-arrow-d down"></span></a>
+				<a href="javascript:void(0)" class="btn btn-block mt10" act="active@#modal-gift">添加礼品记录<span class="icon-arrow-d down"></span></a>
+			</div>
+		</div>
+
+	</section>
+	<div class="modal" id="modal-gift">
+		<div class="modal-content">
+			<header class="bar bar-nav">
+				<a class="mr10 mt10 pull-right" href="javascript:void(0)" act="inactive@#modal-gift">关闭</a>
+				<h1 class="title"></h1>
+			</header>
+			<div class="content">
+				<form class="form" action="?act=findpassword" method="post">
+					<div class="form-group inset">
+						<label>订单号</label>
+						<div class="control-group">
+							<input id="" type="text" class="form-control reset" placeholder="" value="">
+						</div>
+					</div>
+					<div class="form-group submit text-center">
+						<button type="submit" class="btn btn-radius">确定</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<script src="../libs/zepto.min.js"></script>
+<script src = "../dist/js/main.min.js"></script>
+<script>
+/* 展开 & 收起 历史订单 */
+$('.btn-expand').on('click', function(){
+	var $history = $('#list-orders-history');
+	if($history.hasClass('expand')){
+		$history.removeClass('expand');
+		$(this).html('查看历史订单<span class="icon-arrow-d down"></span>');
+	}else{
+		$history.addClass('expand');
+		$(this).html('收起历史订单<span class="icon-arrow-d up"></span>');
+	};
+	return false;
+});
+</script>
+</body>
+</html>

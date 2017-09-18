@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<title>中国邮政</title>
+<meta name="description" content="EMS">
+<meta name="keywords" content="EMS">
+<link rel="stylesheet" href="../libs/css/swiper-3.4.2.min.css">
+<link rel="stylesheet" href="../dist/css/main.min.css">
+<script>
+	var deviceWidth = document.documentElement.clientWidth;
+	deviceWidth = deviceWidth >640 ? 640 : deviceWidth;
+	document.documentElement.style.fontSize = deviceWidth/6.4 +'px';
+</script>
+</head>
+<body>
+	<header class="bar bar-header">
+		<nav>
+			<ul class="bar-header_nav">
+				<!-- <li class="aside-menu">
+					<a href="javascript:void(0);" class="open-aside-menu">
+						<span class="icon icon-menu"></span>
+					</a>
+				</li> -->
+				<li class="login">
+					<div class="hide">
+						<a href="#">登录</a>
+						<a href="#">注册</a>
+					</div>
+					<span>XXXX,您好</span>
+				</li>
+				<li class="logo">
+					<a href="javascript:void(0);" class="header-logo"></a>
+				</li>
+				<!-- <li class="phone">
+					<a href="javascript:void(0);">
+						<span class="icon icon-phone"></span>
+					</a>
+				</li> -->
+				<li class="bag">
+					<a href="javascript:void(0);">
+						<span class="icon-profile"></span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<section class="container">
+		<!-- swiper -->
+		<div class="swiper-container">
+		    <div class="swiper-wrapper">
+		        <div class="swiper-slide">
+					<img src="../dist/images/kv/kv-1.jpg" alt="">
+		        </div>
+		        <div class="swiper-slide">
+					<img src="../dist/images/kv/kv-2.jpg" alt="">
+		        </div>
+		        <div class="swiper-slide">
+					<img src="../dist/images/kv/kv-3.jpg" alt="">
+		        </div>
+		        <div class="swiper-slide">
+					<img src="../dist/images/kv/kv-4.jpg" alt="">
+		        </div>
+		        <div class="swiper-slide">
+					<img src="../dist/images/kv/kv-5.jpg" alt="">
+		        </div>
+		    </div>
+		    <div class="swiper-pagination"></div>
+		</div>
+		<!-- swiper end -->
+		<dl class="items clearfix">
+			<dd>
+				<a href="javascript:void(0);" class="icons icon-1"></a>
+				<span>卡购买</span>
+			</dd>
+			<dd>
+				<a href="javascript:void(0);" class="icons icon-2"></a>
+				<span>卡激活</span>
+			</dd>
+			<dd>
+				<a href="javascript:void(0);" class="icons icon-3"></a>
+				<span>健康咨询</span>
+			</dd>
+			<dd>
+				<a href="javascript:void(0);" class="icons icon-4"></a>
+				<span>紧急救援</span>
+			</dd>
+			<dd>
+				<a href="javascript:void(0);" class="icons icon-5"></a>
+				<span>就医挂号</span>
+			</dd>
+			<dd class="active">
+				<a href="javascript:void(0);" class="icons icon-6"></a>
+				<span>生活服务</span>
+			</dd>
+		</dl>
+		<div class="tips">
+			<div class="tips-img"><img src="../dist/images/ems-logo.jpg" alt=""></div>
+			<div>为提升用户健康水平及生活质量，北京邮政推出健康咨询与紧急救援便民服务平台，向您提供健康咨询、紧急救援、就医指南、预约挂号等便民服务，帮助您及家人解决健康顾虑，为您的家庭撑起一把致亲、致爱的保护伞</div>
+		</div>
+		<footer class="footer">
+			<div class="footer-tel"><i class="icon icon-tel"></i>咨询热线：4008211280</div>
+			<div>京ICP备07021605号</div>
+		</footer>
+	</section>
+	<script src="../libs/zepto.min.js"></script>
+	<script src="../libs/swiper-3.4.2.min.js"></script>
+	<script>
+		var mySwiper = new Swiper ('.swiper-container', {
+			loop: true,
+			pagination: '.swiper-pagination'
+		})
+  </script>
+</body>
+</html>

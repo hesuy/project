@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="format-detection" content="telephone=no">
+<title>中国邮政</title>
+<meta name="description" content="EMS">
+<meta name="keywords" content="EMS">
+<link rel="stylesheet" href="../dist/css/main.min.css">
+<script>
+	var deviceWidth = document.documentElement.clientWidth;
+	deviceWidth = deviceWidth >640 ? 640 : deviceWidth;
+	document.documentElement.style.fontSize = deviceWidth/6.4 +'px';
+</script>
+</head>
+<body>
+	<header class="bar bar-header">
+		<nav>
+			<ul class="bar-header_nav">
+				<!-- <li class="aside-menu">
+					<a href="javascript:void(0);" class="open-aside-menu">
+						<span class="icon icon-menu"></span>
+					</a>
+				</li> -->
+				<li class="login">
+					<div class="hide">
+						<a href="#">登录</a>
+						<a href="#">注册</a>
+					</div>
+					<span>XXXX,您好</span>
+				</li>
+				<li class="logo">
+					<a href="javascript:void(0);" class="header-logo"></a>
+				</li>
+				<!-- <li class="phone">
+					<a href="javascript:void(0);">
+						<span class="icon icon-phone"></span>
+					</a>
+				</li> -->
+				<li class="bag">
+					<a href="javascript:void(0);">
+						<span class="icon-profile"></span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<section class="container content-bg">
+		<div class="content">
+			<div class="title-img"><img src="../dist/images/ok.png" alt=""></div>
+			<div class="title-img title-img-words"><img src="../dist/images/words.png" alt=""></div>
+			<div class="forms form-bg">
+				<form action="" class="form">
+					<div class="form-group inset">
+						<label>姓名</label>
+						<div class="control-group">
+							<input id="name" type="text" class="form-control" placeholder="" value="">
+						</div>
+					</div>
+					<div class="form-group inset">
+						<label>手机</label>
+						<div class="control-group">
+							<input id="mobile" type="tel" class="form-control" placeholder="" value="">
+						</div>
+					</div>
+					<div class="form-group inset">
+						<label>年龄</label>
+						<div class="control-group">
+							<input id="age" type="text" class="form-control" placeholder="" value="">
+						</div>
+					</div>
+					<div class="form-group inset">
+						<label>身份证</label>
+						<div class="control-group">
+							<input id="IDCard" type="text" class="form-control" placeholder="" value="">
+						</div>
+					</div>
+					<div class="form-group inset">
+						<label>福利码</label>
+						<div class="control-group">
+							<input id="welfareCode" type="text" class="form-control" placeholder="" value="">
+						</div>
+					</div>
+					<div class="form-group inset">
+						<label>密码</label>
+						<div class="control-group">
+							<input id="pwd" type="text" class="form-control" placeholder="" value="">
+						</div>
+					</div>
+					<div class="form-group submit text-center pb0">
+						<button type="submit" class="btn btn-submit btn-radius">提交</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	<script src="../libs/zepto.min.js"></script>
+	<script>
+	$('#submit').on('click',function(event) {
+		if(checkName()){
+			if (checkMobile()) {
+				if (checkIDCard()) {
+					if (checkAge()) {
+						//submit
+					};
+				};
+			};
+		}
+	});
+
+	//姓名
+	function checkName(){
+		var $name = $('#name');
+		if($name.val()==""||$name.val()==null||$name.val()==undefined){
+	        $name.addClass("error");
+	        return false;
+	    }else{
+	    	return true;
+	    }
+	}
+	//手机号
+	function checkMobile(){
+	    var $mobile = $('#mobile');
+	    if($mobile.val()==""||$mobile.val()==null||$mobile.val()==undefined){
+	        $mobile.addClass("error");
+	        return false;
+	    }else{
+	        var reg=/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/; 
+	        if(!reg.test($mobile.val())){
+	            $mobile.focus();
+	            $mobile.addClass("error");
+	            $mobile.val("").attr("placeholder","请输入正确的手机号码");
+	            return false;
+	         }else{
+	            $mobile.removeClass("error");
+	            return true;
+	         }
+	    }
+	}
+
+	//年龄
+	function checkAge(){
+		var $age = $('#age');
+		if($age.val()==""||$age.val()==null||$age.val()==undefined){
+	        $age.addClass("error");
+	        return false;
+	    }else{
+	    	if ($age.val()<0 || $age.val()>100) {
+	    		$age.addClass("error");
+	        	return false;
+	    	}else{
+	    		$age.removeClass('error');
+	    		return true;
+	    	}
+	    }
+	}
+
+	//身份证
+	function checkIDCard(){
+		var $IDCard = $('#IDCard');
+		if($IDCard.val()==""||$IDCard.val()==null||$IDCard.val()==undefined){
+	        $IDCard.addClass("error");
+	        return false;
+	    }else{
+			var reg=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+	    	if (!reg.test($IDCard.val())) {
+	    		$mobile.addClass("error");
+	    		return false;
+	    	}else{
+	    		$mobile.removeClass("error");
+	    		return true;
+	    	}
+	    }
+	}
+  	</script>
+</body>
+</html>
