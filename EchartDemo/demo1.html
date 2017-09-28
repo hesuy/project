@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script type="text/javascript" src="jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="echarts.min.js"></script>
+    <script type="text/javascript" src="infographic.js"></script>
+    <script type="text/javascript" src="china.js"></script>
+    <script type="text/javascript" src="echarts-wordcloud.min.js"></script>
+</head>
+
+<body>
+    <div id="chart_N_" style="width:800px;height:600px;"></div>
+    <script type="text/javascript">
+    var myChart_N_ = echarts.init(document.getElementById('chart_N_'), 'infographic');
+    var _data_N_ = [{
+            // "campaignName": "CN回柜邀约",
+            "storeName": "北京赛特",
+            "longitude": "116.448230",
+            "latitude": "39.913394",
+            "adminstore": "ChinaArmaniA00",
+            "members": "90",
+            "responseRate": "28.8889"
+        },
+        {
+            "campaignName": "CN回柜邀约",
+            "storeName": "杭州大厦",
+            "longitude": "120.169818",
+            "latitude": "30.277181",
+            "adminstore": "ChinaArmaniA10",
+            "members": "203",
+            "responseRate": "24.1379"
+        },
+        {
+            "campaignName": "CN回柜邀约",
+            "storeName": "南京金鹰",
+            "longitude": "118.786269",
+            "latitude": "32.047636",
+            "adminstore": "ChinaArmaniA20",
+            "members": "224",
+            "responseRate": "25.8929"
+        },
+        {
+            "campaignName": "CN回柜邀约",
+            "storeName": "北京新光",
+            "longitude": "116.484796",
+            "latitude": "39.916013",
+            "adminstore": "ChinaArmaniA30",
+            "members": "427",
+            "responseRate": "18.2670"
+        },
+        {
+            "campaignName": "CN回柜邀约",
+            "storeName": "上海梅陇镇",
+            "longitude": "121.463675",
+            "latitude": "31.235249",
+            "adminstore": "ChinaArmaniA40",
+            "members": "170",
+            "responseRate": "50.0000"
+        },
+        {
+            "campaignName": "CN回柜邀约",
+            "storeName": "大连麦凯乐",
+            "longitude": "121.640466",
+            "latitude": "38.921470",
+            "adminstore": "ChinaArmaniA50",
+            "members": "142",
+            "responseRate": "22.5352"
+        },
+        {
+            "campaignName": "CN回柜邀约",
+            "storeName": "武汉武商",
+            "longitude": "114.276550",
+            "latitude": "30.586248",
+            "adminstore": "ChinaArmaniA60",
+            "members": "184",
+            "responseRate": "11.4130"
+        },
+        {
+            "campaignName": "CN回柜邀约",
+            "storeName": "西安金花",
+            "longitude": "108.951693",
+            "latitude": "34.266168",
+            "adminstore": "ChinaArmaniA80",
+            "members": "241",
+            "responseRate": "19.5021"
+        },
+        {
+            "campaignName": "CN回柜邀约",
+            "storeName": "北京百盛",
+            "longitude": "116.364911",
+            "latitude": "39.914127",
+            "adminstore": "ChinaArmaniA90",
+            "members": "222",
+            "responseRate": "36.9369"
+        },
+        {
+            "campaignName": "CN回柜邀约",
+            "storeName": "郑州丹尼斯",
+            "longitude": "113.681495",
+            "latitude": "34.763335",
+            "adminstore": "ChinaArmaniAA0",
+            "members": "196",
+            "responseRate": "8.6735"
+        },
+        {
+            "campaignName": "CN回柜邀约",
+            "storeName": "沈阳中兴",
+            "longitude": "123.407627",
+            "latitude": "41.799155",
+            "adminstore": "ChinaArmaniAB0",
+            "members": "130",
+            "responseRate": "22.3077"
+        },
+        {
+            "campaignName": "CN回柜邀约",
+            "storeName": "上海八佰伴",
+            "longitude": "121.522932",
+            "latitude": "31.233985",
+            "adminstore": "ChinaArmaniAD0",
+            "members": "109",
+            "responseRate": "33.0275"
+        }
+    ];
+    var range_N_ = function(data, range, pro) {
+        function compare(property) {
+            return function(a, b) {
+                var num_1 = a[pro];
+                var num_2 = b[pro];
+                return num_1 - num_2;
+            }
+        }
+        var data = data.sort(compare(pro));
+        var rangeData = {
+            'min': data[0],
+            'max': data[data.length - 1]
+        }
+        var value = Number(rangeData[range][pro]);
+        return value;
+    }
+    var convertData_N_ = function(data) {
+        var res = [];
+        for (var i = 0; i < data.length; i++) {
+            var geoCoord = [data[i].longitude, data[i].latitude];
+            res.push({
+                name: data[i].storeName,
+                value: geoCoord.concat([data[i].storeName, data[i].adminstore, data[i].members, data[i].responseRate])
+            });
+        }
+        return res;
+    };
+    var title = _data_N_[0].campaignName
+    var option_N_ = {
+        title: {
+            text: _data_N_[0].campaignName,
+            left: 'center',
+            textStyle: {
+                fontSize: 18,
+                color: '#000'
+            }
+        },
+        tooltip: {
+            formatter: function(params) {
+                name = params.data.name;
+                member = params.data.value[4];
+                responseRate = Math.floor(params.data.value[5]*100)/100;
+                res = '<strong>门 店：' + name + ' </strong> ' + '<br/>' + '响应率：' + responseRate + '%'+ '<br/>人数：'+member+'人';
+                return res;
+            }
+        },
+        visualMap: [{
+                min: range_N_(_data_N_, 'min', 'responseRate'),
+                max: range_N_(_data_N_, 'max', 'responseRate'),
+                left: "right",
+                top: 'center',
+                text: ['响应率'],
+                dimension: 5,
+                inRange: {
+                    color: ['#63BE7B', '#FBE983', '#F8696B', ]
+                },
+                itemHeight: 400,
+                calculable: true,
+                formatter: '{value} %'
+            },
+            {
+                min: range_N_(_data_N_, 'min', 'members'),
+                max: range_N_(_data_N_, 'max', 'members'),
+                left: 'left',
+                top: 'center',
+                dimension: 4,
+                inRange: {
+                    symbolSize: [10, 50]
+                },
+                itemHeight: 400,
+                calculable: true,
+                formatter: '{value} 人'
+            },
+        ],
+        geo: {
+            map: 'china',
+            roam: true,
+        },
+        series: [{
+            name: 'town',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            data: convertData_N_(_data_N_),
+            itemStyle: {
+                normal: {
+                    color: '#FF6C00',
+                }
+            }
+        }, ]
+    };
+    myChart_N_.showLoading();
+    function fetchData_N_() {
+        myChart_N_.hideLoading();
+        myChart_N_.setOption(option_N_, false);
+    }
+    </script>
+</body>
+
+</html>

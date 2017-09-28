@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script type="text/javascript" src="jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="echarts.min.js"></script>
+    <script type="text/javascript" src="infographic.js"></script>
+    <script type="text/javascript" src="china.js"></script>
+    <script type="text/javascript" src="echarts-wordcloud.min.js"></script>
+</head>
+
+<body>
+    <div id="chart" style="width:600px;height:400px;"></div>
+    <script type="text/javascript">
+    var settings = {
+        readValue: 0,
+        preMin: 0,
+        preMax: 0,
+        colorArray: [
+            // "#999999",
+            // "#666666",
+            // "#222222"
+            "#63BE7B",
+            "#FBE983",
+            "#F8696B"
+        ],
+        nullColor: "#333333"
+    };
+
+    function hex2num(hex) {
+        if (hex.charAt(0) == "#") hex = hex.slice(1); //Remove the '#' char - if there is one.
+        var triplet = new Array();
+        var int1, int2;
+        for (var i = 0; i < 6; i += 2) {
+            var part = hex.charAt(i) + hex.charAt(i + 1);
+            triplet.push(parseInt(part, 16));
+        }
+        return triplet;
+    }
+
+    function num2hex(triplet) {
+        var result = "#";
+        for (var i = 0; i < 3; i++) {
+            var hex = Math.round(triplet[i]).toString(16);
+            while (hex.length < 2) {
+                hex = "0" + hex;
+            }
+            result += hex;
+        }
+        return result;
+    }
+
+    function rgbToHsv(triplet) {
+        var r, g, b;
+        r = triplet[0];
+        g = triplet[1];
+        b = triplet[2];
+
+        r = r / 255, g = g / 255, b = b / 255;
+        var max = Math.max(r, g, b), min = Math.min(r, g, b);
+        var h, s, v = max;
+
+        var d = max - min;
+        s = max == 0 ? 0 : d / max;
+
+        if (max == min) {
+            h = 0; // achromatic
+        } else {
+            switch (max) {
+                case r:
+                    h = (g - b) / d + (g < b ? 6 : 0);
+                    break;
+                case g:
+                    h = (b - r) / d + 2;
+                    break;
+                case b:
+                    h = (r - g) / d + 4;
+                    break;
+            }
+            h /= 6;
+        }
+        h = Math.max(0, Math.min(h, 1));
+        s = Math.max(0, Math.min(s, 1));
+        v = Math.max(0, Math.min(v, 1));
+        return [h, s, v];
+    }
+
+    function hsvToRgb(triplet) {
+        var h = triplet[0];
+        var s = triplet[1];
+        var v = triplet[2];
+
+        var r, g, b;
+
+        var i = Math.floor(h * 6);
+        var f = h * 6 - i;
+        var p = v * (1 - s);
+        var q = v * (1 - f * s);
+        var t = v * (1 - (1 - f) * s);
+
+        switch (i % 6) {
+            case 0:
+                r = v, g = t, b = p;
+                break;
+            case 1:
+                r = q, g = v, b = p;
+                break;
+            case 2:
+                r = p, g = v, b = t;
+                break;
+            case 3:
+                r = p, g = q, b = v;
+                break;
+            case 4:
+                r = t, g = p, b = v;
+                break;
+            case 5:
+                r = v, g = p, b = q;
+                break;
+        }
+        r = Math.min(r, 1);
+        g = Math.min(g, 1);
+        b = Math.min(b, 1);
+        return [r * 255, g * 255, b * 255];
+    }
+
+    var getColor = function (percent) {
+        if (percent == null)
+            return nullColor;
+
+        var colors = settings.colorArray.length;
+
+        var colorPosition = (percent * (colors - 1));
+        var sIndex = Math.floor(colorPosition);
+        sIndex = Math.min(colors - 2, sIndex);
+
+        var s = settings.colorArray[sIndex];
+        var e = settings.colorArray[sIndex + 1];
+
+        var sHSL = rgbToHsv(hex2num(s));
+        var eHSL = rgbToHsv(hex2num(e));
+
+        var interiorPercent = (percent * (colors - 1)) - sIndex;
+
+        var hsvResult = transition3(interiorPercent, 1, sHSL, eHSL);
+
+        var dispRGB = hsvToRgb(hsvResult);
+        return num2hex(dispRGB);
+    };
+
+    function transition(value, maximum, start_point, end_point) {
+        var r = start_point + (end_point - start_point) * value / maximum
+        return r;
+    }
+
+    function transition3(value, maximum, s, e) {
+
+        //handle situation where greyscale colors have red hue
+        if (s[1] == 0) s[0] = e[0];
+        if (e[1] == 0) e[0] = s[0];
+
+
+        // handle black saturation issue
+        if (s[2] == 0) s[1] = e[1];
+        if (e[2] == 0) e[1] = s[1];
+
+
+        var p = value / maximum;
+        // hue has to wrap correctly around zero
+
+        var distCCW = (s[0] >= e[0]) ? s[0] - e[0] : 1 + s[0] - e[0];
+        var distCW = (s[0] >= e[0]) ? 1 + e[0] - s[0] : e[0] - s[0];
+
+        var hue = (distCW <= distCCW) ? s[0] + (distCW * p) : s[0] - (distCCW * p);
+        if (hue < 0) hue += 1;
+
+        var saturation = transition(value, maximum, s[1], e[1]); // s
+        var value = transition(value, maximum, s[2], e[2]); // v
+        return [hue, saturation, value];
+    }
+    var myChart_N_ = echarts.init(document.getElementById('chart'), 'infographic');
+    var _data_N_ = [{
+            "storeName": "阿玛尼电子商务",
+            "adminstore": "ChinaArmani983",
+            "members": "2",
+            "responseRate": "0.0000",
+            "pctHot": "0.0000"
+        },
+        {
+            "storeName": "北京赛特",
+            "adminstore": "ChinaArmaniA00",
+            "members": "90",
+            "responseRate": "0.2889",
+            "pctHot": "0.4333"
+        },
+        {
+            "storeName": "杭州大厦",
+            "adminstore": "ChinaArmaniA10",
+            "members": "203",
+            "responseRate": "0.2414",
+            "pctHot": "0.3621"
+        },
+        {
+            "storeName": "南京金鹰",
+            "adminstore": "ChinaArmaniA20",
+            "members": "223",
+            "responseRate": "0.2556",
+            "pctHot": "0.3834"
+        },
+        {
+            "storeName": "北京新光",
+            "adminstore": "ChinaArmaniA30",
+            "members": "428",
+            "responseRate": "0.1822",
+            "pctHot": "0.2733"
+        },
+        {
+            "storeName": "上海梅陇镇",
+            "adminstore": "ChinaArmaniA40",
+            "members": "169",
+            "responseRate": "0.5030",
+            "pctHot": "0.7545"
+        },
+        {
+            "storeName": "大连麦凯乐",
+            "adminstore": "ChinaArmaniA50",
+            "members": "142",
+            "responseRate": "0.2254",
+            "pctHot": "0.3381"
+        },
+        {
+            "storeName": "武汉武商",
+            "adminstore": "ChinaArmaniA60",
+            "members": "184",
+            "responseRate": "0.1141",
+            "pctHot": "0.1711"
+        },
+        {
+            "storeName": "西安金花",
+            "adminstore": "ChinaArmaniA80",
+            "members": "240",
+            "responseRate": "0.1917",
+            "pctHot": "0.2875"
+        },
+        {
+            "storeName": "北京百盛",
+            "adminstore": "ChinaArmaniA90",
+            "members": "223",
+            "responseRate": "0.3677",
+            "pctHot": "0.5515"
+        },
+        {
+            "storeName": "郑州丹尼斯",
+            "adminstore": "ChinaArmaniAA0",
+            "members": "197",
+            "responseRate": "0.0863",
+            "pctHot": "0.1294"
+        },
+        {
+            "storeName": "沈阳中兴",
+            "adminstore": "ChinaArmaniAB0",
+            "members": "130",
+            "responseRate": "0.2231",
+            "pctHot": "0.3346"
+        },
+        {
+            "storeName": "上海八佰伴",
+            "adminstore": "ChinaArmaniAD0",
+            "members": "109",
+            "responseRate": "0.3303",
+            "pctHot": "0.4954"
+        },
+        {
+            "storeName": "贵阳国贸",
+            "adminstore": "ChinaArmaniAF0",
+            "members": "166",
+            "responseRate": "0.2289",
+            "pctHot": "0.3433"
+        },
+        {
+            "storeName": "哈尔滨卓展",
+            "adminstore": "ChinaArmaniAG0",
+            "members": "193",
+            "responseRate": "0.1140",
+            "pctHot": "0.1710"
+        },
+        {
+            "storeName": "成都王府井",
+            "adminstore": "ChinaArmaniAH0",
+            "members": "117",
+            "responseRate": "0.1453",
+            "pctHot": "0.2179"
+        },
+        {
+            "storeName": "杭州银泰",
+            "adminstore": "ChinaArmaniAI0",
+            "members": "168",
+            "responseRate": "0.1667",
+            "pctHot": "0.2500"
+        },
+        {
+            "storeName": "成都仁和光华",
+            "adminstore": "ChinaArmaniAJ0",
+            "members": "79",
+            "responseRate": "0.1392",
+            "pctHot": "0.2088"
+        },
+        {
+            "storeName": "长春卓展",
+            "adminstore": "ChinaArmaniAK0",
+            "members": "88",
+            "responseRate": "0.1392",
+            "pctHot": "0.2088"
+        }
+    ];
+    var itemStyle_N_ = function (pct) {
+            return {
+                normal: {
+                    borderWidth: 10,
+                    borderColor: getColor(pct),//'#c03e45',
+                    color: getColor(pct)
+                }
+            }
+        };
+    var option_N_ = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{b}"
+            },
+            series: [{
+                        type: 'treemap',
+                        width: '100%',
+                        height: '100%',
+                        roam: false, //是否开启拖拽漫游（移动和缩放）
+                        nodeClick: false, //点击节点后的行为,false无反应
+                        breadcrumb: {
+                            show: false
+                        },
+                        label: { //描述了每个矩形中，文本标签的样式。
+                            normal: {
+                                show: true,
+                                position: ['40%', '40%']
+                            }
+                        },
+                        itemStyle_N_: {
+                            normal: {
+                                show: true,
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: 16,
+                                },
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true
+                                }
+                            }
+                        },
+                        data: function() {
+                            var data = [];
+                            for (var i = 0; i < _data_N_.length; i++) {
+                                var item = {
+                                    value: _data_N_[i].members,
+                                    name: _data_N_[i].storeName,
+                                    itemStyle_N_: itemStyle_N_(_data_N_[i].pctHot)
+                                }
+                                data.push(item);
+                            }
+                            return data;
+                        }()
+                    }]
+                }
+    myChart_N_.setOption(option_N_, false);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+       <script type="text/javascript" src="jquery-3.2.1.js"></script>
+       <script type="text/javascript" src="echarts-all-3.js"></script>
+       <script type="text/javascript" src="infographic.js"></script>
+
+</head>
+<body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="chart_N_" style="width: 800px;height:300px;"></div>
+
+    <script type="text/javascript">
+		
+        var myChart_N_ = echarts.init(document.getElementById('chart_N_'),'infographic');
+		var seriesData_N_ = [];//所有活动按活动类型活动类型分组
+		var legend_data_N_ = [];// 活动名称
+
+		var formatPercentage_N_ = function(value1,value2){
+			var _num = parseFloat(value1/value2)*10000;
+			return (Math.round(_num)/100);
+		}
+
+		var symbolSize_N_ = function (data) {
+			return data[2] / 10000;
+		};
+		var itemStyle_N_ = {
+			normal: {
+				shadowBlur: 10,
+				shadowColor: 'rgba(120, 36, 50, 0.5)',
+				shadowOffsetY: 5
+			},
+			emphasis: {color: 'rgb(154, 206, 184)'}
+		};
+		// 指定图表的配置项和数据
+		var option_N_ = {
+
+			tooltip: {
+				formatter: function (params) {
+					return params.value[3]
+						+ '<br/>开始日期：' + params.value[0]
+						+ '<br/>目标人数：' + params.value[2]
+						+ '<br/>响应率：' + params.value[1] + '%';
+				}
+			},
+			legend: {
+				selectedMode: 'multiple',
+				data: legend_data_N_
+			},
+			xAxis: {
+				type: 'time',
+				name: '日期',
+				nameLocation: 'middle',
+				nameGap: 35,
+				inverse: false,
+				splitLine: {
+					lineStyle: {
+						type: 'dashed'
+					}
+				},
+				scale: true,
+				axisLabel: {
+					formatter: function (value, index) {
+						var date = new Date(value);
+						var texts = [date.getFullYear(), (date.getMonth() + 1)];
+						return texts.join('/');
+					}
+				}
+			},
+			yAxis: {
+				name: '响应率',
+				nameLocation: 'middle',
+				nameGap: 30,
+				position: 'right',
+				splitLine: {
+					lineStyle: {
+						type: 'dashed'
+					}
+				},
+				scale: true
+			},
+			dataZoom: [
+				{
+					type: 'slider',
+					xAxisIndex: 0
+				},
+				{
+					type: 'slider',
+					yAxisIndex: 0
+				}
+			],
+			
+		};
+
+		myChart_N_.setOption(option_N_,false);
+		
+		myChart_N_.showLoading();
+		
+		function fetchData_N_() {
+			for(let i = 0;i < _data_N_.length; i++){
+				let _date = _data_N_[i].beginDate,
+					_response = formatPercentage_N_(_data_N_[i].response,_data_N_[i].target),
+					_target = _data_N_[i].target,
+					_name = _data_N_[i].campaignName,
+					_type = _data_N_[i].campaignType,
+					_status = _data_N_[i].status,
+					_id = _data_N_[i].id;
+				if(legend_data_N_.indexOf(_type) === -1){
+					legend_data_N_.push(_type);
+				}
+				// console.log(legend_data_N_);
+				var arr = [];//seriesData_N_内单条分组数据获取指定字段格式
+				arr.push(_date,_response,_target,_name,_type,_status,_id);
+				// console.log(arr);
+				/*
+				 * 判断seriesData_N_下当前活动类型分组是否存在
+				 * 如果存在添加至同一类型数组
+				 * 如果不存在添加一个新类型数组
+				 */
+				if(seriesData_N_.length===0) {
+					seriesData_N_[0] = [];
+					seriesData_N_[0].push(arr);
+				} else {
+					var flag = false;
+					for (let j = 0; j < seriesData_N_.length; j++) {
+						// console.log(seriesData_N_[j][0].indexOf(_type));
+						if (seriesData_N_[j][0].indexOf(_type) === -1) {
+							continue;
+						} else {
+							seriesData_N_[j].push(arr);
+							flag = true;
+						}
+					}
+					if (!flag) {
+						seriesData_N_[seriesData_N_.length] = [];
+						seriesData_N_[seriesData_N_.length - 1].push(arr);
+					}
+				}
+				// console.log(seriesData_N_);
+			}
+			myChart_N_.hideLoading();
+			myChart_N_.setOption({
+				series: function () {
+				var serie = [];
+				for (var i = 0; i < legend_data_N_.length; i++) {
+					var item = {
+						name: legend_data_N_[i],
+						data: seriesData_N_[i],
+						type: 'scatter',
+						symbolSize: symbolSize_N_,
+						itemStyle: itemStyle_N_
+						}
+						serie.push(item);
+					}
+					return serie;
+				}()
+			});
+		};
+		var _data_N_ = [];
+		
+		//////////////////////////////////测试//////////////////////////////////////////
+				var _data_N_ = [{"id":"5","campaignName":"fwev","campaignType":"新品上市","beginDate":"2017-01-01","endDate":"2017-01-03","status":"Temporary","brand":"CPB","target":"876548","revenue":"476279","response":"87492"},{"id":"6","campaignName":"ytut","campaignType":"新品上市","beginDate":"2017-03-03","endDate":"2017-03-03","status":"Closed","brand":"CPB","target":"492013","revenue":"42994","response":"45823"},{"id":"7","campaignName":"closed","campaignType":"新品上市","beginDate":"2017-09-09","endDate":"2017-09-09","status":"Closed","brand":"CPB","target":"988321","revenue":"88323","response":"66772"},{"id":"8","campaignName":"测试账号","campaignType":"新品上市","beginDate":"2017-04-21","endDate":"2017-02-21","status":"Closed","brand":"CPB","target":"555555","revenue":"44444","response":"66666"}];
+				
+
+			// 通过 setTimeout 模拟异步加载
+			setTimeout(function () {
+				fetchData_N_();
+			}, 2000);
+
+    </script>
+	
+</body>
+</html>
+
+<!-- click变色 -->
+			<!-- var index = params.dataIndex; -->
+			<!-- alert(params.value); -->
+			<!-- for(var i = 0 ; i < seriesData_N_1.length ; i++){ -->
+				<!-- if(seriesData_N_1[i].value){ -->
+						<!-- seriesData_N_1[i] = seriesData_N_1[i].value; -->
+					<!-- } -->
+				<!-- if(index == i){ -->
+					<!-- seriesData_N_1[i] = { -->
+						<!-- value : seriesData_N_1[i], -->
+						<!-- itemStyle_N_:{ -->
+							<!-- normal:{color : '#C23531'} -->
+						<!-- } -->
+					<!-- } -->
+				<!-- } -->
+			<!-- } -->
+			<!-- option1.series[sindex].data=seriesData_N_1[i]; -->
+			<!-- myChart1.setOption(option1,true); -->

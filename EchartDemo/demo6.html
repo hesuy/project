@@ -1,0 +1,1526 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script type="text/javascript" src="jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="echarts.min.js"></script>
+    <script type="text/javascript" src="infographic.js"></script>
+    <script type="text/javascript" src="china.js"></script>
+    <script type="text/javascript" src="echarts-wordcloud.min.js"></script>
+</head>
+
+<body>
+    <div id="chart_N_" style="width:800px;height:600px;"></div>
+    <script type="text/javascript">
+    var myChart_N_ = echarts.init(document.getElementById('chart_N_'), 'infographic');
+    var _data_N_ = [];
+
+    myChart_N_.showLoading();
+
+    function fetchData_N_() {
+        myChart_N_.hideLoading();
+        console.log(_data_N_);
+        var all_N_ = []; //处理后的数据
+        var all_sales_N_ = []; //销售数据
+        var all_category_N_ = []; //门店数据
+        var all_date_N_ = []; //时间
+        for (var i = 0; i < _data_N_.length; i++) {
+            if (all_category_N_.indexOf(_data_N_[i].NewCategory) == -1)
+                all_category_N_.push(_data_N_[i].NewCategory);
+            if (all_date_N_.indexOf(_data_N_[i].OrderDate) == -1) all_date_N_.push(_data_N_[i].OrderDate);
+        }
+        for (var i = 0; i < all_date_N_.length; i++) {
+            all_sales_N_[i] = [];
+        }
+        for (var i = 0; i < _data_N_.length; i++) {
+            var sales_n = Number(_data_N_[i].Sales);
+            for (var j = 0; j < all_date_N_.length; j++) {
+                if (_data_N_[i].OrderDate == all_date_N_[j]) {
+                    all_sales_N_[j].push(sales_n);
+                }
+            }
+        }
+        all_N_ = {
+            'data': all_sales_N_,
+            'newCategory': all_category_N_,
+            'date': all_date_N_
+        };
+        var option_N_ = {
+            timeline: {
+                axisType: 'category',
+                autoPlay: true,
+                playInterval: 5000,
+                data: all_N_.date
+            },
+            options: [{
+                title: {
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                calculable: true,
+                grid: {
+                    y: 100,
+                    y2: 100
+                },
+                xAxis: [{
+                    type: 'category',
+                    axisLabel: {
+                        interval: 0
+                    },
+                    offset: 4,
+                    data: all_N_.newCategory,
+                    axisLabel: {
+                        interval: 0,
+                        rotate: -20,
+                        margin: 2
+                    },
+                }],
+                yAxis: [{
+                    type: 'value',
+                    name: '单位: 元'
+                }],
+                series: [{
+                    name: '人数',
+                    type: 'bar',
+                    markLine: {
+                        symbol: ['arrow', 'none'],
+                        symbolSize: [4, 2],
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    color: 'orange'
+                                },
+                                barBorderColor: 'orange',
+                                label: {
+                                    position: 'left',
+                                    formatter: function(params) {
+                                        return Math.round(params.value);
+                                    },
+                                    textStyle: {
+                                        color: 'orange'
+                                    }
+                                }
+                            }
+                        },
+                        data: [{
+                            type: 'average',
+                            name: '平均值'
+                        }]
+                    },
+                    data: all_N_.data[0]
+                }]
+            }]
+        };
+        var setSerie_N_ = function() {
+            for (var i = 1; i < all_N_.data.length; i++) {
+                var map = { series: [{ data: all_N_.data[i] }] };
+                option_N_.options.push(map);
+            }
+        }();
+        myChart_N_.setOption(option_N_, false);
+    }
+    _data_N_ = [{
+            "OrderDate": "2017-07-19",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "3920.00"
+        },
+        {
+            "OrderDate": "2017-07-19",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-20",
+            "NewCategory": "Fragrances",
+            "Sales": "580.00"
+        },
+        {
+            "OrderDate": "2017-07-20",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-20",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "1570.00"
+        },
+        {
+            "OrderDate": "2017-07-20",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "6405.00"
+        },
+        {
+            "OrderDate": "2017-07-20",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "9920.00"
+        },
+        {
+            "OrderDate": "2017-07-20",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "4300.00"
+        },
+        {
+            "OrderDate": "2017-07-20",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "22910.00"
+        },
+        {
+            "OrderDate": "2017-07-20",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "4900.00"
+        },
+        {
+            "OrderDate": "2017-07-20",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-21",
+            "NewCategory": "Fragrances",
+            "Sales": "4400.00"
+        },
+        {
+            "OrderDate": "2017-07-21",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1120.00"
+        },
+        {
+            "OrderDate": "2017-07-21",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "2320.00"
+        },
+        {
+            "OrderDate": "2017-07-21",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "11085.00"
+        },
+        {
+            "OrderDate": "2017-07-21",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "16730.00"
+        },
+        {
+            "OrderDate": "2017-07-21",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "2640.00"
+        },
+        {
+            "OrderDate": "2017-07-21",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "18780.00"
+        },
+        {
+            "OrderDate": "2017-07-21",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "980.00"
+        },
+        {
+            "OrderDate": "2017-07-21",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-22",
+            "NewCategory": "Fragrances",
+            "Sales": "11980.00"
+        },
+        {
+            "OrderDate": "2017-07-22",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "2800.00"
+        },
+        {
+            "OrderDate": "2017-07-22",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "4970.00"
+        },
+        {
+            "OrderDate": "2017-07-22",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "17590.00"
+        },
+        {
+            "OrderDate": "2017-07-22",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "9590.00"
+        },
+        {
+            "OrderDate": "2017-07-22",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "14160.00"
+        },
+        {
+            "OrderDate": "2017-07-22",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "54140.00"
+        },
+        {
+            "OrderDate": "2017-07-22",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "12740.00"
+        },
+        {
+            "OrderDate": "2017-07-22",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-23",
+            "NewCategory": "Fragrances",
+            "Sales": "5080.00"
+        },
+        {
+            "OrderDate": "2017-07-23",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "3920.00"
+        },
+        {
+            "OrderDate": "2017-07-23",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "5710.00"
+        },
+        {
+            "OrderDate": "2017-07-23",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "25260.00"
+        },
+        {
+            "OrderDate": "2017-07-23",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "12085.00"
+        },
+        {
+            "OrderDate": "2017-07-23",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "15720.00"
+        },
+        {
+            "OrderDate": "2017-07-23",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "63780.00"
+        },
+        {
+            "OrderDate": "2017-07-23",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "33320.00"
+        },
+        {
+            "OrderDate": "2017-07-23",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-24",
+            "NewCategory": "Fragrances",
+            "Sales": "3300.00"
+        },
+        {
+            "OrderDate": "2017-07-24",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "560.00"
+        },
+        {
+            "OrderDate": "2017-07-24",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "3510.00"
+        },
+        {
+            "OrderDate": "2017-07-24",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "6445.00"
+        },
+        {
+            "OrderDate": "2017-07-24",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "4980.00"
+        },
+        {
+            "OrderDate": "2017-07-24",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "3320.00"
+        },
+        {
+            "OrderDate": "2017-07-24",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "12440.00"
+        },
+        {
+            "OrderDate": "2017-07-24",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "9800.00"
+        },
+        {
+            "OrderDate": "2017-07-24",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-25",
+            "NewCategory": "Fragrances",
+            "Sales": "1600.00"
+        },
+        {
+            "OrderDate": "2017-07-25",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1120.00"
+        },
+        {
+            "OrderDate": "2017-07-25",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-25",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "13395.00"
+        },
+        {
+            "OrderDate": "2017-07-25",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "11470.00"
+        },
+        {
+            "OrderDate": "2017-07-25",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "2340.00"
+        },
+        {
+            "OrderDate": "2017-07-25",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "6150.00"
+        },
+        {
+            "OrderDate": "2017-07-25",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-25",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-26",
+            "NewCategory": "Fragrances",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-26",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-26",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "460.00"
+        },
+        {
+            "OrderDate": "2017-07-26",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "3595.00"
+        },
+        {
+            "OrderDate": "2017-07-26",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "1870.00"
+        },
+        {
+            "OrderDate": "2017-07-26",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "1560.00"
+        },
+        {
+            "OrderDate": "2017-07-26",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "7580.00"
+        },
+        {
+            "OrderDate": "2017-07-26",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "3920.00"
+        },
+        {
+            "OrderDate": "2017-07-26",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-27",
+            "NewCategory": "Fragrances",
+            "Sales": "4530.00"
+        },
+        {
+            "OrderDate": "2017-07-27",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "560.00"
+        },
+        {
+            "OrderDate": "2017-07-27",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "1470.00"
+        },
+        {
+            "OrderDate": "2017-07-27",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "11795.00"
+        },
+        {
+            "OrderDate": "2017-07-27",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "11465.00"
+        },
+        {
+            "OrderDate": "2017-07-27",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "4200.00"
+        },
+        {
+            "OrderDate": "2017-07-27",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "41490.00"
+        },
+        {
+            "OrderDate": "2017-07-27",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "8820.00"
+        },
+        {
+            "OrderDate": "2017-07-27",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-28",
+            "NewCategory": "Fragrances",
+            "Sales": "9750.00"
+        },
+        {
+            "OrderDate": "2017-07-28",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1120.00"
+        },
+        {
+            "OrderDate": "2017-07-28",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "2110.00"
+        },
+        {
+            "OrderDate": "2017-07-28",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "21625.00"
+        },
+        {
+            "OrderDate": "2017-07-28",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "16430.00"
+        },
+        {
+            "OrderDate": "2017-07-28",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "6640.00"
+        },
+        {
+            "OrderDate": "2017-07-28",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "33890.00"
+        },
+        {
+            "OrderDate": "2017-07-28",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "8820.00"
+        },
+        {
+            "OrderDate": "2017-07-28",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-29",
+            "NewCategory": "Fragrances",
+            "Sales": "20530.00"
+        },
+        {
+            "OrderDate": "2017-07-29",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "2240.00"
+        },
+        {
+            "OrderDate": "2017-07-29",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "3080.00"
+        },
+        {
+            "OrderDate": "2017-07-29",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "14700.00"
+        },
+        {
+            "OrderDate": "2017-07-29",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "21690.00"
+        },
+        {
+            "OrderDate": "2017-07-29",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "7520.00"
+        },
+        {
+            "OrderDate": "2017-07-29",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "54920.00"
+        },
+        {
+            "OrderDate": "2017-07-29",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "15680.00"
+        },
+        {
+            "OrderDate": "2017-07-29",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-30",
+            "NewCategory": "Fragrances",
+            "Sales": "5120.00"
+        },
+        {
+            "OrderDate": "2017-07-30",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "560.00"
+        },
+        {
+            "OrderDate": "2017-07-30",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "690.00"
+        },
+        {
+            "OrderDate": "2017-07-30",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "13025.00"
+        },
+        {
+            "OrderDate": "2017-07-30",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "39370.00"
+        },
+        {
+            "OrderDate": "2017-07-30",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "780.00"
+        },
+        {
+            "OrderDate": "2017-07-30",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "19700.00"
+        },
+        {
+            "OrderDate": "2017-07-30",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "8820.00"
+        },
+        {
+            "OrderDate": "2017-07-30",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-31",
+            "NewCategory": "Fragrances",
+            "Sales": "5380.00"
+        },
+        {
+            "OrderDate": "2017-07-31",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1680.00"
+        },
+        {
+            "OrderDate": "2017-07-31",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "2270.00"
+        },
+        {
+            "OrderDate": "2017-07-31",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "15555.00"
+        },
+        {
+            "OrderDate": "2017-07-31",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "20655.00"
+        },
+        {
+            "OrderDate": "2017-07-31",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "3220.00"
+        },
+        {
+            "OrderDate": "2017-07-31",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "31210.00"
+        },
+        {
+            "OrderDate": "2017-07-31",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "9800.00"
+        },
+        {
+            "OrderDate": "2017-07-31",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-01",
+            "NewCategory": "Fragrances",
+            "Sales": "8300.00"
+        },
+        {
+            "OrderDate": "2017-07-01",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1680.00"
+        },
+        {
+            "OrderDate": "2017-07-01",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "940.00"
+        },
+        {
+            "OrderDate": "2017-07-01",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "16430.00"
+        },
+        {
+            "OrderDate": "2017-07-01",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "10210.00"
+        },
+        {
+            "OrderDate": "2017-07-01",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "4100.00"
+        },
+        {
+            "OrderDate": "2017-07-01",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "36640.00"
+        },
+        {
+            "OrderDate": "2017-07-01",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "9800.00"
+        },
+        {
+            "OrderDate": "2017-07-01",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-02",
+            "NewCategory": "Fragrances",
+            "Sales": "11320.00"
+        },
+        {
+            "OrderDate": "2017-07-02",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "2800.00"
+        },
+        {
+            "OrderDate": "2017-07-02",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "850.00"
+        },
+        {
+            "OrderDate": "2017-07-02",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "12210.00"
+        },
+        {
+            "OrderDate": "2017-07-02",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "8095.00"
+        },
+        {
+            "OrderDate": "2017-07-02",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "13580.00"
+        },
+        {
+            "OrderDate": "2017-07-02",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "35210.00"
+        },
+        {
+            "OrderDate": "2017-07-02",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "3920.00"
+        },
+        {
+            "OrderDate": "2017-07-02",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-03",
+            "NewCategory": "Fragrances",
+            "Sales": "14530.00"
+        },
+        {
+            "OrderDate": "2017-07-03",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "2240.00"
+        },
+        {
+            "OrderDate": "2017-07-03",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-03",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "15115.00"
+        },
+        {
+            "OrderDate": "2017-07-03",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "6220.00"
+        },
+        {
+            "OrderDate": "2017-07-03",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "4000.00"
+        },
+        {
+            "OrderDate": "2017-07-03",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "10110.00"
+        },
+        {
+            "OrderDate": "2017-07-03",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "980.00"
+        },
+        {
+            "OrderDate": "2017-07-03",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-04",
+            "NewCategory": "Fragrances",
+            "Sales": "4840.00"
+        },
+        {
+            "OrderDate": "2017-07-04",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-04",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "2530.00"
+        },
+        {
+            "OrderDate": "2017-07-04",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "4750.00"
+        },
+        {
+            "OrderDate": "2017-07-04",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "2800.00"
+        },
+        {
+            "OrderDate": "2017-07-04",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "4100.00"
+        },
+        {
+            "OrderDate": "2017-07-04",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "20910.00"
+        },
+        {
+            "OrderDate": "2017-07-04",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "2940.00"
+        },
+        {
+            "OrderDate": "2017-07-04",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-05",
+            "NewCategory": "Fragrances",
+            "Sales": "6600.00"
+        },
+        {
+            "OrderDate": "2017-07-05",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "560.00"
+        },
+        {
+            "OrderDate": "2017-07-05",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "1970.00"
+        },
+        {
+            "OrderDate": "2017-07-05",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "12685.00"
+        },
+        {
+            "OrderDate": "2017-07-05",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "6520.00"
+        },
+        {
+            "OrderDate": "2017-07-05",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "8980.00"
+        },
+        {
+            "OrderDate": "2017-07-05",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "26050.00"
+        },
+        {
+            "OrderDate": "2017-07-05",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "4900.00"
+        },
+        {
+            "OrderDate": "2017-07-05",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-06",
+            "NewCategory": "Fragrances",
+            "Sales": "5330.00"
+        },
+        {
+            "OrderDate": "2017-07-06",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1120.00"
+        },
+        {
+            "OrderDate": "2017-07-06",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "2640.00"
+        },
+        {
+            "OrderDate": "2017-07-06",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "10060.00"
+        },
+        {
+            "OrderDate": "2017-07-06",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "4040.00"
+        },
+        {
+            "OrderDate": "2017-07-06",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "9280.00"
+        },
+        {
+            "OrderDate": "2017-07-06",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "30600.00"
+        },
+        {
+            "OrderDate": "2017-07-06",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "2940.00"
+        },
+        {
+            "OrderDate": "2017-07-06",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-07",
+            "NewCategory": "Fragrances",
+            "Sales": "3830.00"
+        },
+        {
+            "OrderDate": "2017-07-07",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "3360.00"
+        },
+        {
+            "OrderDate": "2017-07-07",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "3890.00"
+        },
+        {
+            "OrderDate": "2017-07-07",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "9490.00"
+        },
+        {
+            "OrderDate": "2017-07-07",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "2480.00"
+        },
+        {
+            "OrderDate": "2017-07-07",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "8400.00"
+        },
+        {
+            "OrderDate": "2017-07-07",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "62550.00"
+        },
+        {
+            "OrderDate": "2017-07-07",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "4900.00"
+        },
+        {
+            "OrderDate": "2017-07-07",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-08",
+            "NewCategory": "Fragrances",
+            "Sales": "4740.00"
+        },
+        {
+            "OrderDate": "2017-07-08",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "2800.00"
+        },
+        {
+            "OrderDate": "2017-07-08",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "3730.00"
+        },
+        {
+            "OrderDate": "2017-07-08",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "11720.00"
+        },
+        {
+            "OrderDate": "2017-07-08",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "5910.00"
+        },
+        {
+            "OrderDate": "2017-07-08",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "13480.00"
+        },
+        {
+            "OrderDate": "2017-07-08",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "51710.00"
+        },
+        {
+            "OrderDate": "2017-07-08",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "11760.00"
+        },
+        {
+            "OrderDate": "2017-07-08",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-09",
+            "NewCategory": "Fragrances",
+            "Sales": "7780.00"
+        },
+        {
+            "OrderDate": "2017-07-09",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "560.00"
+        },
+        {
+            "OrderDate": "2017-07-09",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "2230.00"
+        },
+        {
+            "OrderDate": "2017-07-09",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "10425.00"
+        },
+        {
+            "OrderDate": "2017-07-09",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "20320.00"
+        },
+        {
+            "OrderDate": "2017-07-09",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "6540.00"
+        },
+        {
+            "OrderDate": "2017-07-09",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "27360.00"
+        },
+        {
+            "OrderDate": "2017-07-09",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "6860.00"
+        },
+        {
+            "OrderDate": "2017-07-09",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-10",
+            "NewCategory": "Fragrances",
+            "Sales": "4290.00"
+        },
+        {
+            "OrderDate": "2017-07-10",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1120.00"
+        },
+        {
+            "OrderDate": "2017-07-10",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "940.00"
+        },
+        {
+            "OrderDate": "2017-07-10",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "16285.00"
+        },
+        {
+            "OrderDate": "2017-07-10",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "5280.00"
+        },
+        {
+            "OrderDate": "2017-07-10",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "5660.00"
+        },
+        {
+            "OrderDate": "2017-07-10",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "26320.00"
+        },
+        {
+            "OrderDate": "2017-07-10",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "4900.00"
+        },
+        {
+            "OrderDate": "2017-07-10",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-11",
+            "NewCategory": "Fragrances",
+            "Sales": "1500.00"
+        },
+        {
+            "OrderDate": "2017-07-11",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1120.00"
+        },
+        {
+            "OrderDate": "2017-07-11",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "2960.00"
+        },
+        {
+            "OrderDate": "2017-07-11",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "6520.00"
+        },
+        {
+            "OrderDate": "2017-07-11",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "6425.00"
+        },
+        {
+            "OrderDate": "2017-07-11",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "2640.00"
+        },
+        {
+            "OrderDate": "2017-07-11",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "7210.00"
+        },
+        {
+            "OrderDate": "2017-07-11",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "1960.00"
+        },
+        {
+            "OrderDate": "2017-07-11",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-12",
+            "NewCategory": "Fragrances",
+            "Sales": "2350.00"
+        },
+        {
+            "OrderDate": "2017-07-12",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1680.00"
+        },
+        {
+            "OrderDate": "2017-07-12",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "1630.00"
+        },
+        {
+            "OrderDate": "2017-07-12",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "9950.00"
+        },
+        {
+            "OrderDate": "2017-07-12",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "3410.00"
+        },
+        {
+            "OrderDate": "2017-07-12",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "4200.00"
+        },
+        {
+            "OrderDate": "2017-07-12",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "21110.00"
+        },
+        {
+            "OrderDate": "2017-07-12",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "2940.00"
+        },
+        {
+            "OrderDate": "2017-07-12",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-13",
+            "NewCategory": "Fragrances",
+            "Sales": "4700.00"
+        },
+        {
+            "OrderDate": "2017-07-13",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "2240.00"
+        },
+        {
+            "OrderDate": "2017-07-13",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "1130.00"
+        },
+        {
+            "OrderDate": "2017-07-13",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "11960.00"
+        },
+        {
+            "OrderDate": "2017-07-13",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "23900.00"
+        },
+        {
+            "OrderDate": "2017-07-13",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "3220.00"
+        },
+        {
+            "OrderDate": "2017-07-13",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "23860.00"
+        },
+        {
+            "OrderDate": "2017-07-13",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "4900.00"
+        },
+        {
+            "OrderDate": "2017-07-13",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-14",
+            "NewCategory": "Fragrances",
+            "Sales": "9630.00"
+        },
+        {
+            "OrderDate": "2017-07-14",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-14",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "1580.00"
+        },
+        {
+            "OrderDate": "2017-07-14",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "6185.00"
+        },
+        {
+            "OrderDate": "2017-07-14",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "12120.00"
+        },
+        {
+            "OrderDate": "2017-07-14",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "3420.00"
+        },
+        {
+            "OrderDate": "2017-07-14",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "31190.00"
+        },
+        {
+            "OrderDate": "2017-07-14",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "7840.00"
+        },
+        {
+            "OrderDate": "2017-07-14",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-15",
+            "NewCategory": "Fragrances",
+            "Sales": "9335.00"
+        },
+        {
+            "OrderDate": "2017-07-15",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1680.00"
+        },
+        {
+            "OrderDate": "2017-07-15",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "3100.00"
+        },
+        {
+            "OrderDate": "2017-07-15",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "23215.00"
+        },
+        {
+            "OrderDate": "2017-07-15",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "16440.00"
+        },
+        {
+            "OrderDate": "2017-07-15",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "4000.00"
+        },
+        {
+            "OrderDate": "2017-07-15",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "62920.00"
+        },
+        {
+            "OrderDate": "2017-07-15",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "17640.00"
+        },
+        {
+            "OrderDate": "2017-07-15",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-16",
+            "NewCategory": "Fragrances",
+            "Sales": "7500.00"
+        },
+        {
+            "OrderDate": "2017-07-16",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1680.00"
+        },
+        {
+            "OrderDate": "2017-07-16",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "4960.00"
+        },
+        {
+            "OrderDate": "2017-07-16",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "21380.00"
+        },
+        {
+            "OrderDate": "2017-07-16",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "40570.00"
+        },
+        {
+            "OrderDate": "2017-07-16",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "6740.00"
+        },
+        {
+            "OrderDate": "2017-07-16",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "39810.00"
+        },
+        {
+            "OrderDate": "2017-07-16",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "17640.00"
+        },
+        {
+            "OrderDate": "2017-07-16",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-17",
+            "NewCategory": "Fragrances",
+            "Sales": "3120.00"
+        },
+        {
+            "OrderDate": "2017-07-17",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "560.00"
+        },
+        {
+            "OrderDate": "2017-07-17",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "310.00"
+        },
+        {
+            "OrderDate": "2017-07-17",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "3335.00"
+        },
+        {
+            "OrderDate": "2017-07-17",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "4960.00"
+        },
+        {
+            "OrderDate": "2017-07-17",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "2640.00"
+        },
+        {
+            "OrderDate": "2017-07-17",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "22960.00"
+        },
+        {
+            "OrderDate": "2017-07-17",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "8820.00"
+        },
+        {
+            "OrderDate": "2017-07-17",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-18",
+            "NewCategory": "Fragrances",
+            "Sales": "1500.00"
+        },
+        {
+            "OrderDate": "2017-07-18",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "1120.00"
+        },
+        {
+            "OrderDate": "2017-07-18",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "1700.00"
+        },
+        {
+            "OrderDate": "2017-07-18",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "6990.00"
+        },
+        {
+            "OrderDate": "2017-07-18",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "6540.00"
+        },
+        {
+            "OrderDate": "2017-07-18",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "780.00"
+        },
+        {
+            "OrderDate": "2017-07-18",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "580.00"
+        },
+        {
+            "OrderDate": "2017-07-18",
+            "NewCategory": "SkinCare_Lotion",
+            "Sales": "3920.00"
+        },
+        {
+            "OrderDate": "2017-07-18",
+            "NewCategory": "UV",
+            "Sales": "0.00"
+        },
+        {
+            "OrderDate": "2017-07-19",
+            "NewCategory": "Fragrances",
+            "Sales": "830.00"
+        },
+        {
+            "OrderDate": "2017-07-19",
+            "NewCategory": "MakeUp_Base",
+            "Sales": "560.00"
+        },
+        {
+            "OrderDate": "2017-07-19",
+            "NewCategory": "MakeUp_Eyes_Others",
+            "Sales": "1090.00"
+        },
+        {
+            "OrderDate": "2017-07-19",
+            "NewCategory": "MakeUp_FDT_Compact",
+            "Sales": "17825.00"
+        },
+        {
+            "OrderDate": "2017-07-19",
+            "NewCategory": "MakeUp_Lips",
+            "Sales": "4040.00"
+        },
+        {
+            "OrderDate": "2017-07-19",
+            "NewCategory": "SkinCare_Cleanser",
+            "Sales": "7420.00"
+        },
+        {
+            "OrderDate": "2017-07-19",
+            "NewCategory": "SkinCare_Eye_Face_Others_Homme",
+            "Sales": "27310.00"
+        }
+    ];
+    typeof fetchData_N_ !== "undefined" && fetchData_N_();
+    </script>
+</body>
+
+</html>

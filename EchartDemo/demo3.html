@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- 引入 ECharts 文件 -->
+    <script type="text/javascript" src="jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="echarts.min.js"></script>
+    <script type="text/javascript" src="infographic.js"></script>
+    <script type="text/javascript" src="china.js"></script>
+    <script type="text/javascript" src="echarts-wordcloud.min.js"></script>
+</head>
+
+<body>
+    <div id="chart_N_" style="width:800px;height:600px;"></div>
+    <script type="text/javascript">
+    var myChart_N_ = echarts.init(document.getElementById('chart_N_'), 'infographic');
+    var _data_N_ = [];
+    var colors_N_ = ['#d14a61', '#5793f3', '#675bba'];
+    var legend_data_N_ = ['销售额', '订单量', '客单价'];
+    var sales_data_N_ = []; //销售额
+    var trans_data_N_ = []; //订单量
+    var aus_data_N_ = []; //客单价
+    var store_data_N_ = []; //门店名称
+
+    var range_N_ = function(data, range, pro) {
+        function compare(property) {
+            return function(a, b) {
+                var num_1 = a[pro];
+                var num_2 = b[pro];
+                return num_1 - num_2;
+            }
+        }
+        var data = data.sort(compare(pro));
+        var rangeData = {
+            'min': data[0],
+            'max': data[data.length - 1]
+        }
+        var value = Number(rangeData[range][pro]);
+        return value;
+    }
+
+    myChart_N_.showLoading();
+    function fetchData_N_() {
+        myChart_N_.hideLoading();
+        for (var i = 0; i < _data_N_.length; i++) {
+            store_data_N_.push(_data_N_[i].storeName);
+            sales_data_N_.push(_data_N_[i].sales);
+            trans_data_N_.push(_data_N_[i].trans);
+            aus_data_N_.push(_data_N_[i].aus);
+        }
+        var option_N_ = {
+            color: colors_N_,
+
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'cross' }
+            },
+            grid: {
+                right: '20%'
+            },
+            legend: {
+                data: legend_data_N_
+            },
+            xAxis: [{
+                type: 'category',
+                axisTick: {
+                    alignWithLabel: true
+                },
+                data: store_data_N_
+            }],
+            yAxis: [{
+                    type: 'value',
+                    name: legend_data_N_[0],
+                    min: range_N_(_data_N_, 'min', 'sales'),
+                    max: range_N_(_data_N_, 'max', 'sales'),
+                    position: 'right',
+                    axisLine: {
+                        lineStyle: {
+                            color: colors_N_[0]
+                        }
+                    },
+                    axisLabel: {
+                        formatter: '{value} 元'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: legend_data_N_[1],
+                    min: range_N_(_data_N_, 'min', 'trans'),
+                    max: range_N_(_data_N_, 'max', 'trans'),
+                    position: 'right',
+                    offset: 80,
+                    axisLine: {
+                        lineStyle: {
+                            color: colors_N_[1]
+                        }
+                    },
+                    axisLabel: {
+                        formatter: '{value} 单'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: legend_data_N_[2],
+                    min: range_N_(_data_N_, 'min', 'aus'),
+                    max: range_N_(_data_N_, 'max', 'aus'),
+                    position: 'left',
+                    axisLine: {
+                        lineStyle: {
+                            color: colors_N_[2]
+                        }
+                    },
+                    axisLabel: {
+                        formatter: '{value} 元'
+                    }
+                }
+            ],
+            series: [{
+                    name: legend_data_N_[0],
+                    type: 'bar',
+                    data: sales_data_N_
+                },
+                {
+                    name: legend_data_N_[1],
+                    type: 'bar',
+                    yAxisIndex: 1,
+                    data: trans_data_N_
+                },
+                {
+                    name: legend_data_N_[2],
+                    type: 'line',
+                    yAxisIndex: 2,
+                    data: aus_data_N_
+                }
+            ]
+        };
+        myChart_N_.setOption(option_N_, false);
+    }
+    _data_N_=[{"campaignName":"CN回柜邀约","storeName":"烟台振华","adminstore":"ChinaArmaniM20","sales":"3810.00","trans":"3","aus":"1270.00"},{"campaignName":"CN回柜邀约","storeName":"长春欧亚","adminstore":"ChinaArmaniM60","sales":"2250.00","trans":"1","aus":"2250.00"},{"campaignName":"CN回柜邀约","storeName":"温州银泰","adminstore":"ChinaArmaniAS0","sales":"20920.00","trans":"13","aus":"1609.23"},{"campaignName":"CN回柜邀约","storeName":"深圳芮欧","adminstore":"ChinaArmaniG30","sales":"24550.00","trans":"8","aus":"3068.75"},{"campaignName":"CN回柜邀约","storeName":"武汉群光","adminstore":"ChinaArmaniGF0","sales":"9300.00","trans":"7","aus":"1328.57"},{"campaignName":"CN回柜邀约","storeName":"南通八佰伴","adminstore":"ChinaArmaniGT0","sales":"66205.00","trans":"16","aus":"4137.81"},{"campaignName":"CN回柜邀约","storeName":"荆门东方","adminstore":"ChinaArmaniM50","sales":"630.00","trans":"1","aus":"630.00"},{"campaignName":"CN回柜邀约","storeName":"杭州银泰","adminstore":"ChinaArmaniAI0","sales":"109130.00","trans":"35","aus":"3118.00"},{"campaignName":"CN回柜邀约","storeName":"沈阳中兴","adminstore":"ChinaArmaniAB0","sales":"35525.00","trans":"18","aus":"1973.61"},{"campaignName":"CN回柜邀约","storeName":"贵阳逸天城","adminstore":"ChinaArmaniGB0","sales":"45200.00","trans":"23","aus":"1965.22"},{"campaignName":"CN回柜邀约","storeName":"唐山振华","adminstore":"ChinaArmaniM00","sales":"2960.00","trans":"2","aus":"1480.00"},{"campaignName":"CN回柜邀约","storeName":"沈阳卓展","adminstore":"ChinaArmaniG20","sales":"7720.00","trans":"10","aus":"772.00"},{"campaignName":"CN回柜邀约","storeName":"北京汉光","adminstore":"ChinaArmaniGS0","sales":"90070.00","trans":"46","aus":"1958.04"},{"campaignName":"CN回柜邀约","storeName":"北京君太","adminstore":"ChinaArmaniGH0","sales":"10330.00","trans":"10","aus":"1033.00"},{"campaignName":"CN回柜邀约","storeName":"大连麦凯乐","adminstore":"ChinaArmaniA50","sales":"71035.00","trans":"31","aus":"2291.45"},{"campaignName":"CN回柜邀约","storeName":"南宁百盛","adminstore":"ChinaArmaniGL0","sales":"15025.00","trans":"10","aus":"1502.50"},{"campaignName":"CN回柜邀约","storeName":"西安高新","adminstore":"ChinaArmaniGZ0","sales":"13760.00","trans":"5","aus":"2752.00"},{"campaignName":"CN回柜邀约","storeName":"北京新光","adminstore":"ChinaArmaniA30","sales":"202755.00","trans":"70","aus":"2896.50"},{"campaignName":"CN回柜邀约","storeName":"无锡商业大厦","adminstore":"ChinaArmaniAN0","sales":"20635.00","trans":"6","aus":"3439.17"},{"campaignName":"CN回柜邀约","storeName":"乌鲁木齐天山百货","adminstore":"ChinaArmaniAL0","sales":"56610.00","trans":"21","aus":"2695.71"},{"campaignName":"CN回柜邀约","storeName":"沈阳新一城","adminstore":"ChinaArmaniGD0","sales":"35290.00","trans":"8","aus":"4411.25"},{"campaignName":"CN回柜邀约","storeName":"上海梅陇镇","adminstore":"ChinaArmaniA40","sales":"139835.00","trans":"88","aus":"1589.03"},{"campaignName":"CN回柜邀约","storeName":"青岛啤酒城","adminstore":"ChinaArmaniGQ0","sales":"13215.00","trans":"5","aus":"2643.00"},{"campaignName":"CN回柜邀约","storeName":"郑州丹尼斯","adminstore":"ChinaArmaniAA0","sales":"54390.00","trans":"20","aus":"2719.50"},{"campaignName":"CN回柜邀约","storeName":"成都仁和光华","adminstore":"ChinaArmaniAJ0","sales":"36550.00","trans":"14","aus":"2610.71"},{"campaignName":"CN回柜邀约","storeName":"常州泰富","adminstore":"ChinaArmaniAO0","sales":"50025.00","trans":"22","aus":"2273.86"},{"campaignName":"CN回柜邀约","storeName":"长沙友谊","adminstore":"ChinaArmaniAX0","sales":"96375.00","trans":"29","aus":"3323.28"},{"campaignName":"CN回柜邀约","storeName":"哈尔滨松雷","adminstore":"ChinaArmaniGR0","sales":"1320.00","trans":"2","aus":"660.00"},{"campaignName":"CN回柜邀约","storeName":"宜昌国贸","adminstore":"ChinaArmaniGY0","sales":"11290.00","trans":"4","aus":"2822.50"},{"campaignName":"CN回柜邀约","storeName":"长春卓展","adminstore":"ChinaArmaniAK0","sales":"40340.00","trans":"23","aus":"1753.91"},{"campaignName":"CN回柜邀约","storeName":"北京新世界","adminstore":"ChinaArmaniGX0","sales":"3010.00","trans":"2","aus":"1505.00"},{"campaignName":"CN回柜邀约","storeName":"长沙海信","adminstore":"ChinaArmaniM30","sales":"79155.00","trans":"23","aus":"3441.52"},{"campaignName":"CN回柜邀约","storeName":"天津海信","adminstore":"ChinaArmaniAP0","sales":"16430.00","trans":"7","aus":"2347.14"},{"campaignName":"CN回柜邀约","storeName":"太原王府井","adminstore":"ChinaArmaniGG0","sales":"8340.00","trans":"5","aus":"1668.00"},{"campaignName":"CN回柜邀约","storeName":"杭州大厦","adminstore":"ChinaArmaniA10","sales":"61825.00","trans":"36","aus":"1717.36"},{"campaignName":"CN回柜邀约","storeName":"郑州大卫城","adminstore":"ChinaArmaniGA0","sales":"32305.00","trans":"16","aus":"2019.06"},{"campaignName":"CN回柜邀约","storeName":"成都伊势丹","adminstore":"ChinaArmaniAZ0","sales":"7795.00","trans":"4","aus":"1948.75"},{"campaignName":"CN回柜邀约","storeName":"北京赛特","adminstore":"ChinaArmaniA00","sales":"31105.00","trans":"14","aus":"2221.79"},{"campaignName":"CN回柜邀约","storeName":"南京金鹰","adminstore":"ChinaArmaniA20","sales":"123745.00","trans":"35","aus":"3535.57"},{"campaignName":"CN回柜邀约","storeName":"贵阳国贸","adminstore":"ChinaArmaniAF0","sales":"81270.00","trans":"39","aus":"2083.85"},{"campaignName":"CN回柜邀约","storeName":"重庆远东","adminstore":"ChinaArmaniAW0","sales":"95095.00","trans":"44","aus":"2161.25"},{"campaignName":"CN回柜邀约","storeName":"北京百盛","adminstore":"ChinaArmaniA90","sales":"194510.00","trans":"67","aus":"2903.13"},{"campaignName":"CN回柜邀约","storeName":"上海八佰伴","adminstore":"ChinaArmaniAD0","sales":"66090.00","trans":"24","aus":"2753.75"},{"campaignName":"CN回柜邀约","storeName":"武汉武商","adminstore":"ChinaArmaniA60","sales":"70300.00","trans":"25","aus":"2812.00"},{"campaignName":"CN回柜邀约","storeName":"上海久光","adminstore":"ChinaArmaniAT0","sales":"53015.00","trans":"21","aus":"2524.52"},{"campaignName":"CN回柜邀约","storeName":"西安金花","adminstore":"ChinaArmaniA80","sales":"78355.00","trans":"23","aus":"3406.74"},{"campaignName":"CN回柜邀约","storeName":"济南银座","adminstore":"ChinaArmaniAQ0","sales":"59565.00","trans":"20","aus":"2978.25"},{"campaignName":"CN回柜邀约","storeName":"上海大丸","adminstore":"ChinaArmaniG80","sales":"22750.00","trans":"11","aus":"2068.18"},{"campaignName":"CN回柜邀约","storeName":"青岛海信","adminstore":"ChinaArmaniGC0","sales":"50180.00","trans":"23","aus":"2181.74"},{"campaignName":"CN回柜邀约","storeName":"沈阳新玛特","adminstore":"ChinaArmaniGK0","sales":"580.00","trans":"1","aus":"580.00"},{"campaignName":"CN回柜邀约","storeName":"昆明百盛","adminstore":"ChinaArmaniGP0","sales":"84570.00","trans":"51","aus":"1658.24"},{"campaignName":"CN回柜邀约","storeName":"广州友谊","adminstore":"ChinaArmaniG00","sales":"41315.00","trans":"18","aus":"2295.28"},{"campaignName":"CN回柜邀约","storeName":"哈尔滨远大","adminstore":"ChinaArmaniG50","sales":"43940.00","trans":"24","aus":"1830.83"},{"campaignName":"CN回柜邀约","storeName":"成都王府井二店","adminstore":"ChinaArmaniGN0","sales":"21660.00","trans":"13","aus":"1666.15"},{"campaignName":"CN回柜邀约","storeName":"哈尔滨卓展","adminstore":"ChinaArmaniAG0","sales":"30140.00","trans":"17","aus":"1772.94"},{"campaignName":"CN回柜邀约","storeName":"徐州金鹰","adminstore":"ChinaArmaniGI0","sales":"35280.00","trans":"25","aus":"1411.20"},{"campaignName":"CN回柜邀约","storeName":"石家庄北国","adminstore":"ChinaArmaniGJ0","sales":"30870.00","trans":"11","aus":"2806.36"},{"campaignName":"CN回柜邀约","storeName":"呼和浩特维多利","adminstore":"ChinaArmaniGW0","sales":"14990.00","trans":"7","aus":"2141.43"},{"campaignName":"CN回柜邀约","storeName":"合肥银泰","adminstore":"ChinaArmaniG10","sales":"64810.00","trans":"25","aus":"2592.40"},{"campaignName":"CN回柜邀约","storeName":"长沙平和堂","adminstore":"ChinaArmaniG40","sales":"44545.00","trans":"24","aus":"1856.04"},{"campaignName":"CN回柜邀约","storeName":"宁波银泰","adminstore":"ChinaArmaniG90","sales":"24275.00","trans":"9","aus":"2697.22"},{"campaignName":"CN回柜邀约","storeName":"成都连卡佛","adminstore":"ChinaArmaniAU0","sales":"37140.00","trans":"12","aus":"3095.00"},{"campaignName":"CN回柜邀约","storeName":"西安开元","adminstore":"ChinaArmaniAV0","sales":"40740.00","trans":"18","aus":"2263.33"},{"campaignName":"CN回柜邀约","storeName":"南京中央","adminstore":"ChinaArmaniG60","sales":"26560.00","trans":"12","aus":"2213.33"},{"campaignName":"CN回柜邀约","storeName":"深圳茂业","adminstore":"ChinaArmaniG70","sales":"21030.00","trans":"11","aus":"1911.82"},{"campaignName":"CN回柜邀约","storeName":"广州新鸿基","adminstore":"ChinaArmaniGO0","sales":"27880.00","trans":"6","aus":"4646.67"},{"campaignName":"CN回柜邀约","storeName":"重庆茂业","adminstore":"ChinaArmaniGM0","sales":"31820.00","trans":"10","aus":"3182.00"},{"campaignName":"CN回柜邀约","storeName":"成都王府井","adminstore":"ChinaArmaniAH0","sales":"25685.00","trans":"17","aus":"1510.88"},{"campaignName":"CN回柜邀约","storeName":"南京德基广场","adminstore":"ChinaArmaniAM0","sales":"47315.00","trans":"21","aus":"2253.10"},{"campaignName":"CN回柜邀约","storeName":"西安珠江","adminstore":"ChinaArmaniAY0","sales":"41465.00","trans":"15","aus":"2764.33"},{"campaignName":"CN回柜邀约","storeName":"西宁王府井","adminstore":"ChinaArmaniGU0","sales":"48935.00","trans":"27","aus":"1812.41"},{"campaignName":"CN回柜邀约","storeName":"兰州国芳","adminstore":"ChinaArmaniGE0","sales":"12380.00","trans":"8","aus":"1547.50"},{"campaignName":"CN回柜邀约","storeName":"南昌百盛","adminstore":"ChinaArmaniGV0","sales":"10820.00","trans":"8","aus":"1352.50"}];
+    typeof fetchData_N_ !== "undefined" && fetchData_N_();
+    </script>
+</body>
+
+</html>
